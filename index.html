@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geoandina Tech &amp; Analytics | Business Intelligence, Data Logging e IA para Minería en Perú</title>
+<meta name="description" content="Consultoría tecnológica en Business Intelligence, Data Logging geológico, analítica minera con Inteligencia Artificial y desarrollo de software a medida en Perú. Cumplimiento Ley N.° 29733.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ SISTEMA DE COLOR MINERAL · COBRE / ORO / MOLIBDENO ============ */
+:root{
+  --bg:#0f0c09; --bg2:#151009; --surface:#1c1611; --surface2:#251d15; --overlay:#2b221a;
+  --line:#3b2f24; --line2:#54422f;
+  --text:#f0e8dc; --text2:#bfae97; --text3:#8f7d66;
+  --cu:#e0762f; --cu2:#f2953f; --cu-deep:#8a4a1c; --cu-soft:rgba(224,118,47,.14);
+  --mo:#4da3ff; --au:#e8c04a; --bornite:#c95bd8; --malachite:#3ecf8e;
+  --ok:#3ecf8e; --warn:#f0b429; --bad:#f0506e; --info:#4da3ff;
+  --scrim:rgba(8,5,3,.72);
+  --grad-brand:linear-gradient(100deg,#e0762f 0%,#e8c04a 52%,#4da3ff 110%);
+  --grad-btn:linear-gradient(120deg,#e0762f,#f2a13f);
+  --shadow:0 12px 34px rgba(0,0,0,.45);
+  --ease:cubic-bezier(.22,.9,.28,1);
+  --contour-op:.055; --aurora-op:.30; --grain-op:.045;
+  --topbar-h:68px;
+}
+[data-theme="light"]{
+  --bg:#f2ece2; --bg2:#eae2d4; --surface:#fbf7f0; --surface2:#f0e8da; --overlay:#fffdf8;
+  --line:#d9ccb8; --line2:#c2b096;
+  --text:#251b10; --text2:#5d4d3a; --text3:#8a7860;
+  --cu:#b4551a; --cu2:#cf6a24; --cu-deep:#9c5a24; --cu-soft:rgba(180,85,26,.12);
+  --mo:#1f6fd6; --au:#a97e12; --bornite:#a136b0; --malachite:#1f9d6b;
+  --ok:#1f9d6b; --warn:#a97a10; --bad:#d3304f; --info:#1f6fd6;
+  --scrim:rgba(40,28,16,.48);
+  --grad-brand:linear-gradient(100deg,#b4551a 0%,#a97e12 52%,#1f6fd6 110%);
+  --grad-btn:linear-gradient(120deg,#c25e1e,#e08a2e);
+  --shadow:0 10px 28px rgba(90,60,25,.14);
+  --contour-op:.085; --aurora-op:.20; --grain-op:.035;
+}
+*{box-sizing:border-box;margin:0;padding:0;scrollbar-width:thin;scrollbar-color:var(--cu-deep) var(--surface2)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--surface2)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--cu),var(--cu-deep));border-radius:8px;border:2px solid var(--surface2)}
+::selection{background:var(--cu);color:#160c04}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  background:var(--bg);color:var(--text);font-size:15.5px;line-height:1.58;
+  min-height:100vh;overflow-x:hidden;
+}
+.mono{font-family:'IBM Plex Mono',ui-monospace,'Cascadia Code',Consolas,monospace}
+button{font-family:inherit;color:inherit}
+a{color:var(--cu2);text-decoration:none}
+:focus-visible{outline:2px solid var(--cu2);outline-offset:2px;border-radius:6px}
+.skip{position:fixed;left:12px;top:-60px;z-index:200;background:var(--cu);color:#160c04;padding:10px 16px;border-radius:10px;font-weight:700;transition:top .25s}
+.skip:focus{top:12px}
+svg.ic{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* ============ FONDO TOPOGRÁFICO EN CAPAS ============ */
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:
+  radial-gradient(1200px 640px at 85% -8%,var(--cu-soft),transparent 62%),
+  linear-gradient(180deg,var(--bg2),var(--bg) 42%)}
+.bg .aur{position:absolute;border-radius:50%;filter:blur(75px);opacity:var(--aurora-op);will-change:transform}
+.bg .a1{width:50vw;height:50vw;left:-14vw;top:-16vw;background:radial-gradient(circle,#e0762f,transparent 65%);animation:drift1 32s var(--ease) infinite alternate}
+.bg .a2{width:42vw;height:42vw;right:-10vw;top:12vh;background:radial-gradient(circle,#e8c04a,transparent 65%);animation:drift2 40s var(--ease) infinite alternate}
+.bg .a3{width:46vw;height:46vw;left:22vw;bottom:-22vw;background:radial-gradient(circle,#4da3ff,transparent 65%);animation:drift3 46s var(--ease) infinite alternate}
+@keyframes drift1{to{transform:translate(8vw,6vh) scale(1.12)}}
+@keyframes drift2{to{transform:translate(-7vw,9vh) scale(.92)}}
+@keyframes drift3{to{transform:translate(5vw,-8vh) scale(1.1)}}
+.bg .contour{position:absolute;inset:0;opacity:var(--contour-op);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%23e0762f' stroke-width='1.1'%3E%3Cpath d='M0 60 C90 20 180 100 270 60 S420 90 420 60'/%3E%3Cpath d='M0 130 C100 90 200 170 300 130 S420 160 420 130'/%3E%3Cpath d='M0 205 C80 165 190 245 290 205 S420 235 420 205'/%3E%3Cpath d='M0 280 C110 240 210 320 310 280 S420 310 420 280'/%3E%3Cpath d='M0 355 C90 315 190 395 290 355 S420 385 420 355'/%3E%3Ccircle cx='330' cy='90' r='26'/%3E%3Ccircle cx='330' cy='90' r='44'/%3E%3Ccircle cx='90' cy='330' r='22'/%3E%3Ccircle cx='90' cy='330' r='40'/%3E%3C/g%3E%3C/svg%3E")}
+.bg .grain{position:absolute;inset:0;opacity:var(--grain-op);mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ============ TOPBAR ============ */
+.topbar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1320px;margin:auto;display:flex;align-items:center;gap:14px;padding:11px 22px}
+.brand{display:flex;align-items:center;gap:11px;color:inherit;flex:none}
+.brand .crys{width:38px;height:38px;filter:drop-shadow(0 0 9px rgba(224,118,47,.48))}
+.brand h1,.brand .brand-title{font-size:17px;font-weight:800;letter-spacing:-.02em;line-height:1.15;margin:0}
+.brand .brand-title em{font-style:normal;background:var(--grad-brand);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand small{display:block;font-size:10px;color:var(--text3);letter-spacing:.08em;font-weight:600}
+.nav{display:flex;gap:2px;margin-left:10px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{font-size:13px;font-weight:600;color:var(--text2);padding:7px 11px;border-radius:9px;white-space:nowrap;border:1px solid transparent;transition:.18s}
+.nav a:hover{color:var(--text);background:var(--surface2)}
+.nav a.on{color:var(--cu2);background:var(--cu-soft);border-color:color-mix(in srgb,var(--cu) 38%,transparent)}
+.top-actions{display:flex;gap:8px;margin-left:auto;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:13px;font-weight:700;padding:9px 15px;border-radius:10px;
+  border:1px solid var(--line2);background:var(--surface);color:var(--text);cursor:pointer;transition:.18s var(--ease);white-space:nowrap}
+.btn:hover{border-color:var(--cu);color:var(--cu2);transform:translateY(-1px);box-shadow:0 6px 18px rgba(224,118,47,.18)}
+.btn:active{transform:translateY(0)}
+.btn.primary{background:var(--grad-btn);color:#1c0e04;border-color:transparent;box-shadow:0 5px 18px rgba(224,118,47,.34)}
+.btn.primary:hover{color:#1c0e04;filter:brightness(1.07)}
+.btn.icon{padding:9px}
+.btn.sm{padding:6px 11px;font-size:12px;border-radius:8px}
+.menu-toggle{display:none}
+
+/* ============ CONTENEDOR Y SECCIONES ============ */
+.wrap{max-width:1320px;margin:auto;padding:0 22px}
+section{scroll-margin-top:calc(var(--topbar-h) + 22px);padding:56px 0}
+section.tight{padding:36px 0}
+.sec-head{margin-bottom:26px;max-width:820px}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:.14em;color:var(--cu2);text-transform:uppercase;margin-bottom:8px}
+.kicker::before{content:"";width:18px;height:2px;background:var(--cu);border-radius:2px}
+.sec-head h2{font-size:clamp(26px,3.2vw,38px);font-weight:800;letter-spacing:-.025em;line-height:1.15;margin-bottom:10px}
+.sec-head .sub{font-size:15.5px;color:var(--text2);line-height:1.6}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s var(--ease) calc(var(--i,0)*60ms),transform .55s var(--ease) calc(var(--i,0)*60ms)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ HERO ============ */
+.hero{padding:44px 0 40px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center}
+.hero-pill{display:inline-flex;align-items:center;gap:9px;padding:6px 13px;border-radius:999px;background:var(--cu-soft);border:1px solid color-mix(in srgb,var(--cu) 38%,transparent);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--cu2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+.hero-pill .pulse{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(62,207,142,.6);animation:ripple 2.2s infinite}
+@keyframes ripple{70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.hero h1{font-size:clamp(30px,4.1vw,50px);font-weight:900;letter-spacing:-.03em;line-height:1.09;margin-bottom:16px}
+.hero h1 em{font-style:normal;background:var(--grad-brand);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{font-size:16.5px;color:var(--text2);line-height:1.62;margin-bottom:22px;max-width:620px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.hero-ctas .btn{padding:12px 20px;font-size:14px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px 18px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--text2)}
+.hero-meta span{display:inline-flex;align-items:center;gap:6px}
+.hero-meta svg{color:var(--cu2);width:15px;height:15px}
+
+/* Tarjeta visual Hero */
+.hero-panel{padding:20px;position:relative;overflow:hidden;border-color:var(--line2)}
+.hero-panel::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--grad-brand)}
+.hp-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:13px;border-bottom:1px solid var(--line);margin-bottom:15px}
+.hp-title{font-size:13px;font-weight:800;letter-spacing:-.01em}
+.hp-sub{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text3)}
+.hp-badge{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;color:var(--ok);background:color-mix(in srgb,var(--ok) 13%,transparent);border:1px solid color-mix(in srgb,var(--ok) 40%,transparent);padding:3px 9px;border-radius:8px;display:inline-flex;align-items:center;gap:6px}
+.hp-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+.hp-kpi{background:var(--surface2);border:1px solid var(--line);border-radius:11px;padding:11px 12px}
+.hp-kpi .l{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);font-weight:700}
+.hp-kpi .v{font-family:'IBM Plex Mono',monospace;font-size:21px;font-weight:700;margin:2px 0;color:var(--text)}
+.hp-kpi .v small{font-size:11.5px;color:var(--cu2);margin-left:3px}
+.hp-kpi .d{font-size:11px;color:var(--text2)}
+.hp-bars{background:var(--surface2);border:1px solid var(--line);border-radius:11px;padding:12px;margin-bottom:12px}
+.hp-bars-top{display:flex;justify-content:space-between;font-size:11px;color:var(--text2);margin-bottom:8px;font-weight:600}
+.hp-bars-row{display:flex;align-items:flex-end;gap:5px;height:58px}
+.hp-bars-row i{flex:1;border-radius:4px 4px 2px 2px;background:linear-gradient(180deg,var(--cu2),var(--cu-deep));transition:height .6s var(--ease),opacity .4s}
+.hp-feed{display:flex;flex-direction:column;gap:7px}
+.hp-feed-item{display:flex;align-items:center;gap:9px;font-size:11.5px;color:var(--text2);background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:7px 10px}
+.hp-feed-item b{font-family:'IBM Plex Mono',monospace;color:var(--text);font-size:11px}
+.hp-dot{width:8px;height:8px;border-radius:50%;flex:none}
+
+/* ============ PILARES (NOSOTROS) ============ */
+.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pillar{padding:24px;position:relative;overflow:hidden;transition:.2s var(--ease)}
+.pillar:hover{transform:translateY(-3px);border-color:var(--cu)}
+.pillar-num{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--cu2);margin-bottom:12px;display:inline-flex;align-items:center;gap:8px}
+.pillar-num span{padding:3px 9px;border-radius:7px;background:var(--cu-soft);border:1px solid color-mix(in srgb,var(--cu) 35%,transparent)}
+.pillar h3{font-size:18px;font-weight:800;margin-bottom:8px;letter-spacing:-.015em}
+.pillar p{font-size:14px;color:var(--text2);line-height:1.6}
+
+/* ============ LÍNEAS DE NEGOCIO (TOUCH CONSULTING) ============ */
+.lines-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.line-card{padding:22px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;cursor:pointer;transition:.22s var(--ease)}
+.line-card:hover{transform:translateY(-4px);border-color:var(--cu);box-shadow:0 16px 36px rgba(0,0,0,.35)}
+.line-card.featured{border-color:color-mix(in srgb,var(--cu) 52%,var(--line));background:linear-gradient(160deg,color-mix(in srgb,var(--cu) 8%,var(--surface)),var(--surface))}
+.line-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.line-ico{width:46px;height:46px;border-radius:12px;background:var(--cu-soft);border:1px solid color-mix(in srgb,var(--cu) 38%,transparent);display:flex;align-items:center;justify-content:center;color:var(--cu2)}
+.line-ico svg{width:23px;height:23px}
+.line-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;padding:4px 8px;border-radius:7px;background:var(--surface2);border:1px solid var(--line2);color:var(--text2)}
+.line-card.featured .line-tag{background:var(--cu);color:#160c04;border-color:transparent}
+.line-card h3{font-size:17.5px;font-weight:800;letter-spacing:-.015em;line-height:1.25}
+.line-card p{font-size:13.5px;color:var(--text2);flex:1}
+.line-more{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--cu2);margin-top:4px;background:none;border:none;padding:0;cursor:pointer;text-align:left}
+.line-card:hover .line-more svg{transform:translateX(3px)}
+.line-more svg{width:15px;height:15px;transition:.18s}
+
+/* ============ DEMO SEMIANIMADA INTERACTIVA ============ */
+.demo-shell{padding:20px;border-color:var(--line2)}
+.demo-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 16px;background:var(--surface2);border:1px solid var(--line);border-radius:12px;margin-bottom:16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:6px 11px;border-radius:9px;border:1px solid var(--line2);background:var(--surface);cursor:pointer;transition:.15s;color:var(--text2)}
+.chip .cd{width:8px;height:8px;border-radius:3px;background:var(--c,var(--cu))}
+.chip[aria-pressed="true"]{border-color:var(--c,var(--cu));color:var(--text);background:color-mix(in srgb,var(--c,var(--cu)) 18%,var(--surface))}
+.chip:hover{border-color:var(--c,var(--cu))}
+.demo-slider{display:flex;align-items:center;gap:10px;margin-left:auto;font-size:12px;font-weight:600;color:var(--text2)}
+.demo-slider input[type="range"]{-webkit-appearance:none;appearance:none;width:130px;height:20px;background:transparent;cursor:pointer}
+.demo-slider input[type="range"]::-webkit-slider-runnable-track{height:5px;border-radius:3px;background:linear-gradient(90deg,var(--cu-deep),var(--cu))}
+.demo-slider input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:5px;margin-top:-5.5px;background:var(--grad-btn);border:2px solid var(--bg);box-shadow:0 0 8px rgba(224,118,47,.5)}
+.demo-slider output{font-family:'IBM Plex Mono',monospace;color:var(--cu2);min-width:48px}
+.demo-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.dkpi{position:relative;padding:14px 15px;background:var(--surface2);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.dkpi::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--kc,var(--cu))}
+.dkpi .lbl{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text3)}
+.dkpi .val{font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:700;margin:3px 0 2px;color:var(--text)}
+.dkpi .val small{font-size:12px;color:var(--text3);margin-left:3px;font-weight:500}
+.dkpi .sub{font-size:11.5px;color:var(--text2)}
+.demo-views{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;margin-bottom:14px}
+.dv-panel{background:var(--bg2);border:1px solid var(--line);border-radius:13px;overflow:hidden;display:flex;flex-direction:column}
+.dv-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--surface2)}
+.dv-head h3{font-size:13.5px;font-weight:800}
+.dv-head span{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text3)}
+.dv-canvas-wrap{position:relative;height:310px}
+.dv-canvas-wrap canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:crosshair}
+.tip{position:absolute;z-index:10;pointer-events:none;background:var(--overlay);border:1px solid var(--line2);border-radius:10px;padding:8px 11px;font-size:11.5px;line-height:1.45;box-shadow:var(--shadow);max-width:240px;opacity:0;transition:opacity .12s;color:var(--text2)}
+.tip.show{opacity:1}
+.tip b{color:var(--text);font-family:'IBM Plex Mono',monospace}
+.dv-foot{padding:7px 14px;font-size:11px;color:var(--text3);border-top:1px solid var(--line);display:flex;gap:14px;flex-wrap:wrap}
+
+.demo-bottom{display:grid;grid-template-columns:.85fr 1.15fr;gap:14px}
+.litho-panel{background:var(--bg2);border:1px solid var(--line);border-radius:13px;overflow:hidden;display:flex;flex-direction:column}
+.litho-list{padding:14px;display:flex;flex-direction:column;gap:11px;flex:1;justify-content:center}
+.lrow{display:grid;grid-template-columns:92px 1fr 74px;gap:10px;align-items:center;font-size:12px}
+.lrow-name{display:flex;flex-direction:column;line-height:1.2}
+.lrow-name b{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text)}
+.lrow-name span{font-size:10.5px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lrow-bar{height:14px;background:var(--surface2);border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.lrow-bar i{display:block;height:100%;border-radius:5px;transition:width .45s var(--ease)}
+.lrow-val{font-family:'IBM Plex Mono',monospace;font-size:11.5px;text-align:right;color:var(--text)}
+
+.tbl-panel{background:var(--bg2);border:1px solid var(--line);border-radius:13px;overflow:hidden;display:flex;flex-direction:column}
+.tbl-scroll{overflow:auto;max-height:265px}
+.demo-tbl{width:100%;border-collapse:collapse;font-size:12px;min-width:540px}
+.demo-tbl th{position:sticky;top:0;background:var(--surface2);padding:8px 10px;text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text2);border-bottom:1px solid var(--line2)}
+.demo-tbl td{padding:7px 10px;border-bottom:1px solid var(--line);color:var(--text2);white-space:nowrap}
+.demo-tbl td.num{font-family:'IBM Plex Mono',monospace;text-align:right;color:var(--text)}
+.demo-tbl tbody tr{cursor:pointer;transition:background .12s}
+.demo-tbl tbody tr:hover,.demo-tbl tbody tr.hov{background:color-mix(in srgb,var(--cu) 14%,transparent)}
+.cls-pill{display:inline-flex;align-items:center;padding:2px 7px;border-radius:6px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700}
+.qc-ok{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent);padding:2px 7px;border-radius:6px}
+.qc-warn{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;color:var(--warn);background:color-mix(in srgb,var(--warn) 15%,transparent);padding:2px 7px;border-radius:6px}
+.demo-cta-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:16px;padding:14px 18px;border-radius:12px;background:color-mix(in srgb,var(--cu) 10%,var(--surface2));border:1px solid color-mix(in srgb,var(--cu) 38%,var(--line))}
+.demo-cta-bar p{font-size:13.5px;color:var(--text2)}
+.demo-cta-bar b{color:var(--text)}
+
+/* ============ CASOS DE ÉXITO ============ */
+.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.case-card{padding:22px;display:flex;flex-direction:column;gap:12px}
+.case-sector{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--cu2)}
+.case-card h3{font-size:17.5px;font-weight:800;line-height:1.28}
+.case-block{background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:11px 13px;font-size:13px;color:var(--text2)}
+.case-block strong{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:3px}
+.case-metric{margin-top:auto;padding-top:10px;border-top:1px solid var(--line);display:flex;align-items:center;gap:9px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ok);font-weight:600}
+
+/* ============ REGULACIONES PERÚ ============ */
+.reg-banner{padding:28px;border-color:color-mix(in srgb,var(--cu) 40%,var(--line));background:linear-gradient(155deg,color-mix(in srgb,var(--cu) 7%,var(--surface)),var(--surface))}
+.reg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px;margin-bottom:20px}
+.reg-card{background:var(--surface2);border:1px solid var(--line);border-radius:13px;padding:18px}
+.reg-card .reg-badge{display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;color:var(--ok);margin-bottom:9px}
+.reg-card h3{font-size:16px;font-weight:800;margin-bottom:7px}
+.reg-card p{font-size:13px;color:var(--text2);margin-bottom:10px}
+.kw-row{display:flex;flex-wrap:wrap;gap:6px}
+.kw{font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:3px 8px;border-radius:6px;background:var(--bg2);border:1px solid var(--line2);color:var(--text2)}
+.reg-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding-top:14px;border-top:1px solid var(--line)}
+.reg-note{font-size:12.5px;color:var(--text3);margin-left:auto}
+
+/* ============ FAQ ============ */
+.faq-list{display:flex;flex-direction:column;gap:10px;max-width:920px}
+.faq-item{background:var(--surface);border:1px solid var(--line);border-radius:13px;overflow:hidden;transition:border-color .18s}
+.faq-item[open]{border-color:var(--cu)}
+.faq-item summary{list-style:none;padding:17px 20px;font-weight:700;font-size:15.5px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary svg{color:var(--cu2);transition:transform .22s}
+.faq-item[open] summary svg{transform:rotate(180deg)}
+.faq-ans{padding:0 20px 18px;font-size:14px;color:var(--text2);line-height:1.65;border-top:1px solid var(--line);padding-top:14px}
+
+/* ============ CONTACTO DIRECTO (SIN FORMULARIOS) ============ */
+.contact-box{padding:30px;display:grid;grid-template-columns:1fr 1.15fr;gap:26px;align-items:center}
+.contact-box h2{font-size:clamp(24px,3vw,34px);font-weight:800;line-height:1.18;margin-bottom:10px}
+.contact-box p{font-size:15px;color:var(--text2);margin-bottom:16px}
+.contact-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.c-card{background:var(--surface2);border:1px solid var(--line2);border-radius:13px;padding:17px;display:flex;flex-direction:column;gap:8px;transition:.18s}
+.c-card:hover{border-color:var(--cu);transform:translateY(-2px)}
+.c-card .c-lbl{font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--cu2);font-weight:700}
+.c-card .c-val{font-size:14.5px;font-weight:800;color:var(--text);word-break:break-word}
+.c-card .c-sub{font-size:12px;color:var(--text3)}
+.c-card .c-btns{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid var(--line);background:var(--surface);margin-top:24px;padding:34px 0 28px}
+.foot-grid{display:grid;grid-template-columns:1.2fr .9fr .9fr;gap:24px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.foot-links{display:flex;flex-direction:column;gap:8px;font-size:13.5px}
+.foot-links h4{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:4px;font-family:'IBM Plex Mono',monospace}
+.foot-links a,.foot-links button{color:var(--text2);background:none;border:none;text-align:left;cursor:pointer;font-size:13.5px;padding:0}
+.foot-links a:hover,.foot-links button:hover{color:var(--cu2)}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:18px;font-size:12.5px;color:var(--text3)}
+
+/* ============ DIÁLOGOS / MODALES ============ */
+dialog{border:1px solid var(--line2);border-radius:16px;background:var(--surface);color:var(--text);padding:0;width:min(780px,94vw);max-height:86vh;margin:auto;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+dialog::backdrop{background:var(--scrim);backdrop-filter:blur(4px)}
+dialog[open]{animation:dlgIn .26s var(--ease)}
+@keyframes dlgIn{from{opacity:0;transform:translateY(12px) scale(.98)}}
+.dlg-head{display:flex;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface);z-index:4}
+.dlg-head h3{font-size:18px;font-weight:800}
+.dlg-head .sub{font-size:12px;color:var(--text3)}
+.dlg-head .x{margin-left:auto}
+.dlg-body{padding:22px;overflow-y:auto;max-height:calc(86vh - 76px)}
+.step-list{display:flex;flex-direction:column;gap:10px;margin:14px 0 18px}
+.step-row{display:grid;grid-template-columns:30px 1fr;gap:12px;background:var(--surface2);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+.step-num{width:30px;height:30px;border-radius:50%;background:var(--cu-soft);border:1px solid var(--cu);color:var(--cu2);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700}
+.step-row h4{font-size:13.5px;font-weight:800;margin-bottom:3px}
+.step-row p{font-size:12.5px;color:var(--text2)}
+.policy-sec{margin-bottom:14px;background:var(--surface2);border:1px solid var(--line);border-radius:11px;padding:13px 15px}
+.policy-sec h4{font-size:13.5px;font-weight:800;color:var(--cu2);margin-bottom:4px}
+.policy-sec p{font-size:13px;color:var(--text2)}
+
+/* ============ TOAST ============ */
+.toasts{position:fixed;right:18px;bottom:18px;z-index:90;display:flex;flex-direction:column;gap:8px;max-width:min(350px,90vw)}
+.toast{background:var(--overlay);border:1px solid var(--line2);border-left:4px solid var(--ok);border-radius:11px;padding:11px 14px;font-size:13px;box-shadow:var(--shadow);animation:tIn .28s var(--ease)}
+@keyframes tIn{from{opacity:0;transform:translateX(24px)}}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:1080px){
+  .hero-grid,.contact-box{grid-template-columns:1fr}
+  .lines-grid,.pillars-grid,.cases-grid,.reg-grid{grid-template-columns:repeat(2,1fr)}
+  .demo-kpis{grid-template-columns:repeat(2,1fr)}
+  .demo-views,.demo-bottom{grid-template-columns:1fr}
+  .contact-cards{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--surface);border-bottom:1px solid var(--line);padding:12px 22px;gap:6px;margin-left:0}
+  .nav.open{display:flex}
+  .menu-toggle{display:inline-flex}
+  .foot-grid{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  section{padding:40px 0}
+  .lines-grid,.pillars-grid,.cases-grid,.reg-grid,.demo-kpis{grid-template-columns:1fr}
+  .btn .bt-hide-sm{display:none}
+  .demo-slider{margin-left:0;width:100%;justify-content:space-between}
+  .dv-canvas-wrap{height:260px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido principal</a>
+
+<!-- Sprite de iconos vectoriales -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 6-7"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 17l9 5 9-5"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 1v3m6-3v3M9 20v3m6-3v3M1 9h3m-3 6h3M20 9h3m-3 6h3"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 3v5M9 13h.01M15 13h.01M9 16h6"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.5 3 8.2 7 10 4-1.8 7-5.5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polygon points="16 8 14 14 8 16 10 10 16 8"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20 6 4"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7A2 2 0 0 1 22 16.9Z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 3h7v7m0-7L10 14"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.5 12.5 5 5 10-11"/></symbol>
+</svg>
+
+<div class="bg" aria-hidden="true">
+  <div class="aur a1"></div><div class="aur a2"></div><div class="aur a3"></div>
+  <div class="contour"></div><div class="grain"></div>
+</div>
+
+<!-- ================= HEADER ================= -->
+<header class="topbar" id="top">
+  <div class="topbar-in">
+    <a class="brand" href="#inicio" aria-label="Inicio Geoandina Tech & Analytics">
+      <svg class="crys" viewBox="0 0 40 40" aria-hidden="true">
+        <defs><linearGradient id="gcu" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#f2a13f"/><stop offset=".55" stop-color="#e0762f"/><stop offset="1" stop-color="#4da3ff"/>
+        </linearGradient></defs>
+        <path d="M20 3 33 12v16L20 37 7 28V12L20 3Z" fill="none" stroke="url(#gcu)" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M20 3v34M7 12l13 8 13-8M7 28l13-8 13 8" fill="none" stroke="url(#gcu)" stroke-width="1.3" opacity=".75"/>
+        <circle cx="20" cy="20" r="3.2" fill="url(#gcu)"/>
+      </svg>
+      <div>
+        <div class="brand-title"><span data-cfg="brandShort">Geoandina</span> · <em>Analytics &amp; IA</em></div>
+        <small class="mono" data-cfg="brandSub">SOLUCIONES TECNOLÓGICAS PARA MINERÍA · PERÚ</small>
+      </div>
+    </a>
+
+    <nav class="nav" id="mainNav" aria-label="Navegación principal">
+      <a href="#inicio" class="on">Inicio</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#lineas-de-negocio">Líneas de Negocio</a>
+      <a href="#demo-interactiva">Demo Interactiva</a>
+      <a href="#casos">Casos de Uso</a>
+      <a href="#regulaciones">Normativa Perú</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <div class="top-actions">
+      <button class="btn icon" id="btnTheme" title="Cambiar tema claro/oscuro" aria-label="Cambiar tema">
+        <svg class="ic" id="themeIc"><use href="#i-sun"/></svg>
+      </button>
+      <a class="btn sm" href="portal-geometalurgico.html" title="Abrir Portal Geometalúrgico completo">
+        <svg class="ic"><use href="#i-ext"/></svg><span class="bt-hide-sm">Portal Demo</span>
+      </a>
+      <a class="btn primary sm" href="#contacto">Contáctanos</a>
+      <button class="btn icon menu-toggle" id="btnMenu" aria-label="Abrir menú" aria-expanded="false">
+        <svg class="ic"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="inicio">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-pill"><span class="pulse"></span>BI · Data Logging · Inteligencia Artificial para Minería</div>
+          <h1>Transformamos datos complejos de minería y operaciones en <em>decisiones ejecutivas</em> con IA</h1>
+          <p class="lead">
+            A través de <strong data-cfg="parentCompany">Geoandina</strong>, conectamos tu software de <em>data logging</em>, reportes geológicos y sistemas operativos para convertir exportaciones difíciles de analizar en dashboards interactivos, alertas inteligentes y trazabilidad alineada con la normativa peruana.
+          </p>
+          <div class="hero-ctas">
+            <a class="btn primary" href="#demo-interactiva">
+              <svg class="ic"><use href="#i-play"/></svg>Explorar Demo Interactiva
+            </a>
+            <a class="btn" href="#lineas-de-negocio">
+              Ver Líneas de Negocio <svg class="ic"><use href="#i-arrow"/></svg>
+            </a>
+          </div>
+          <div class="hero-meta">
+            <span><svg class="ic"><use href="#i-pin"/></svg><b data-cfg="city">La Molina, Lima – Perú</b></span>
+            <span><svg class="ic"><use href="#i-phone"/></svg><a data-cfg-href="phoneHref" href="tel:+51999000000" data-cfg="phone">+51 999 000 000</a></span>
+            <span><svg class="ic"><use href="#i-mail"/></svg><a data-cfg-href="emailHref" href="mailto:contacto@geoandina.pe" data-cfg="email">contacto@geoandina.pe</a></span>
+          </div>
+        </div>
+
+        <aside class="card hero-panel" aria-label="Vista previa ejecutiva en vivo">
+          <div class="hp-head">
+            <div>
+              <div class="hp-title">Monitor Operativo &amp; Geometalúrgico IA</div>
+              <div class="hp-sub">EXTRACCION AUTOMATICA · DATA LOGGING → BI</div>
+            </div>
+            <span class="hp-badge"><span class="pulse" style="width:7px;height:7px;border-radius:50%;background:var(--ok)"></span>En línea</span>
+          </div>
+          <div class="hp-kpis">
+            <div class="hp-kpi">
+              <div class="l">Ley Mediana Cu</div>
+              <div class="v" id="heroCu">2,640<small>ppm</small></div>
+              <div class="d">P90: 6,850 ppm · 8 sondajes</div>
+            </div>
+            <div class="hp-kpi">
+              <div class="l">Valor NSR Estimado</div>
+              <div class="v" id="heroNsr">19.40<small>US$/t</small></div>
+              <div class="d">Ruta preferente G1 / G2</div>
+            </div>
+          </div>
+          <div class="hp-bars">
+            <div class="hp-bars-top">
+              <span>Distribución de leyes por banco de perforación</span>
+              <span class="mono" style="color:var(--cu2)" id="heroBenchLbl">Cota 4,660 → 4,320 msnm</span>
+            </div>
+            <div class="hp-bars-row" id="heroBars"></div>
+          </div>
+          <div class="hp-feed">
+            <div class="hp-feed-item">
+              <span class="hp-dot" style="background:var(--cu2)"></span>
+              <div><b>IA Insight:</b> Núcleo de calcopirita-bornita detectado en <span>EVR-DDH-003</span> (&gt; 5,000 ppm Cu).</div>
+            </div>
+            <div class="hp-feed-item">
+              <span class="hp-dot" style="background:var(--ok)"></span>
+              <div><b>QA/QC + Ley 29733:</b> 11 reglas de validación y resguardo documental aprobados.</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= NUESTROS PILARES (NOSOTROS) ================= -->
+  <section id="nosotros" class="tight">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">01 · Nuestros Pilares</span>
+        <h2>Soluciones tecnológicas modernas con conocimiento real de la operación minera</h2>
+        <p class="sub">Nacemos de la experiencia logística y operativa junto a Geoandina para llevar Business Intelligence, software e Inteligencia Artificial práctica a minería, industria y empresas corporativas en el Perú.</p>
+      </div>
+      <div class="pillars-grid">
+        <article class="card pillar reveal" style="--i:0">
+          <div class="pillar-num"><span>01</span> Madurez Operativa</div>
+          <h3>Entendemos la mina y el negocio</h3>
+          <p>No solo escribimos código: conocemos la realidad de la logística minera, el registro geológico (<em>geo-logging</em>) y las exigencias gerenciales en Perú para proponer soluciones viables desde el día uno.</p>
+        </article>
+        <article class="card pillar reveal" style="--i:1">
+          <div class="pillar-num"><span>02</span> Impacto Medible</div>
+          <h3>De datos complejos a decisiones en segundos</h3>
+          <p>Transformamos exportaciones pesadas de aplicaciones técnicas y hojas de Excel dispersas en tableros claros que ahorran horas de análisis a geólogos, supervisores y gerentes.</p>
+        </article>
+        <article class="card pillar reveal" style="--i:2">
+          <div class="pillar-num"><span>03</span> Enfoque Estratégico con IA</div>
+          <h3>Sobre las herramientas que ya usas</h3>
+          <p>Nos adaptamos a tu infraestructura actual —bases de datos, software minero, ERPs o archivos CSV— aplicando Inteligencia Artificial para extraer patrones e insights sin atarte a licencias rígidas.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LÍNEAS DE NEGOCIO ================= -->
+  <section id="lineas-de-negocio">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">02 · Líneas de Negocio</span>
+        <h2>Con nuestras líneas de negocio acompañamos cada paso de tu viaje digital</h2>
+        <p class="sub">Portafolio modular de servicios para empresas mineras, logísticas e industriales. Haz clic en cualquier servicio para explorar nuestra metodología de 5 etapas.</p>
+      </div>
+      <div class="lines-grid" id="linesGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= DEMO SEMIANIMADA INTERACTIVA ================= -->
+  <section id="demo-interactiva">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">03 · Caso Demostrativo en Vivo</span>
+        <h2>¿Cómo se ve tu data minera convertida en un Dashboard Ejecutivo?</h2>
+        <p class="sub">Simulación semianimada con <strong>datos 100% sintéticos de demostración</strong> (Pórfido Cu-Mo, 8 sondajes DDH). Filtra por dominio o mueve la profundidad de banco para observar cómo la analítica actualiza métricas, secciones de perforación, vista aérea y muestreo al instante.</p>
+      </div>
+
+      <div class="card demo-shell reveal" style="--i:1">
+        <!-- Controles de la demo -->
+        <div class="demo-controls">
+          <button class="btn primary sm" id="btnAutoPlay" aria-pressed="true" title="Pausar o reanudar simulación automática">
+            <svg class="ic" id="playIc"><use href="#i-pause"/></svg><span id="playTxt">Simulación activa</span>
+          </button>
+          <div class="chips" id="demoClassChips" role="group" aria-label="Filtrar por dominio geometalúrgico"></div>
+          <label class="demo-slider">
+            <span>Corte Banco (Z):</span>
+            <input type="range" id="demoDepth" min="110" max="500" step="10" value="500" aria-label="Profundidad de corte de banco en metros">
+            <output id="demoDepthVal">500 m</output>
+          </label>
+        </div>
+
+        <!-- 4 KPIs en vivo -->
+        <div class="demo-kpis">
+          <div class="dkpi" style="--kc:var(--cu)">
+            <div class="lbl">Muestras Analizadas</div>
+            <div class="val" id="dkN">—</div>
+            <div class="sub" id="dkNSub">0 m perforados · 8 sondajes</div>
+          </div>
+          <div class="dkpi" style="--kc:var(--cu2)">
+            <div class="lbl">Ley Mediana Cu</div>
+            <div class="val" id="dkCu">—</div>
+            <div class="sub" id="dkCuSub">P90 — ppm</div>
+          </div>
+          <div class="dkpi" style="--kc:var(--mo)">
+            <div class="lbl">Mo Mediano / Au Prom.</div>
+            <div class="val" id="dkMo">—</div>
+            <div class="sub" id="dkAuSub">Au — ppm</div>
+          </div>
+          <div class="dkpi" style="--kc:var(--malachite)">
+            <div class="lbl">NSR Mediano &amp; QA/QC</div>
+            <div class="val" id="dkNsr">—</div>
+            <div class="sub"><span style="color:var(--ok);font-weight:700">● QA/QC APROBADO</span> · 11 reglas</div>
+          </div>
+        </div>
+
+        <!-- Vistas espaciales: Sección + Planta -->
+        <div class="demo-views">
+          <div class="dv-panel">
+            <div class="dv-head">
+              <h3>Vista de Sección de Perforaciones (Vertical y Diagonal)</h3>
+              <span class="mono">X (E) vs Z (msnm) · Mirando al Norte</span>
+            </div>
+            <div class="dv-canvas-wrap" id="secWrap">
+              <canvas id="secCanvas"></canvas>
+              <div class="tip" id="secTip"></div>
+            </div>
+            <div class="dv-foot">
+              <span>▲ Collar del sondaje (DDH-001 a 008)</span>
+              <span style="color:var(--warn)">--- Corte de banco Z</span>
+              <span>Pasa el cursor sobre cualquier muestra</span>
+            </div>
+          </div>
+
+          <div class="dv-panel">
+            <div class="dv-head">
+              <h3>Vista Aérea en Plano (Planta)</h3>
+              <span class="mono">X (E) vs Y (N) · Norte Arriba</span>
+            </div>
+            <div class="dv-canvas-wrap" id="planWrap">
+              <canvas id="planCanvas"></canvas>
+              <div class="tip" id="planTip"></div>
+            </div>
+            <div class="dv-foot">
+              <span>Concentración mineral proyectada en planta</span>
+              <span>Hover sincronizado con Sección y Tabla</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Composición por litología + Muestras individuales -->
+        <div class="demo-bottom">
+          <div class="litho-panel">
+            <div class="dv-head">
+              <h3>Ley Mediana de Cu por Litología</h3>
+              <span class="mono">Estadístico robusto (ppm)</span>
+            </div>
+            <div class="litho-list" id="lithoBars"></div>
+          </div>
+
+          <div class="tbl-panel">
+            <div class="dv-head">
+              <h3>Muestras Individuales (Composición Geoquímica)</h3>
+              <span class="mono" id="tblCountLbl">Top muestras filtradas</span>
+            </div>
+            <div class="tbl-scroll">
+              <table class="demo-tbl" aria-label="Tabla resumida de muestras demostrativas">
+                <thead>
+                  <tr>
+                    <th>Sample</th><th>Sondaje</th><th>Tramo</th><th>Litología</th>
+                    <th style="text-align:right">Cu ppm</th><th style="text-align:right">Mo ppm</th>
+                    <th style="text-align:right">Au ppm</th><th>Clase</th><th>QC</th>
+                  </tr>
+                </thead>
+                <tbody id="demoTblBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-cta-bar">
+          <p><b>¿Quieres explorar el motor analítico completo?</b> Carga archivos CSV, revisa las 11 reglas QA/QC por muestra, la dispersión log-log Cu/Mo, el linaje de cada dato y la exportación de selecciones.</p>
+          <a class="btn primary" href="portal-geometalurgico.html">
+            Abrir Workbench Geometalúrgico Completo <svg class="ic"><use href="#i-arrow"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CASOS DE ÉXITO ================= -->
+  <section id="casos" class="tight">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">04 · Casos de Uso &amp; Soluciones Aplicadas</span>
+        <h2>Experiencia práctica orientada a resolver cuellos de botella operativos</h2>
+        <p class="sub">Ejemplos de cómo estructuramos soluciones de software, BI e Inteligencia Artificial para gerencia, geología y logística minera.</p>
+      </div>
+      <div class="cases-grid">
+        <article class="card case-card reveal" style="--i:0">
+          <span class="case-sector">Business Intelligence · Geología</span>
+          <h3>Visibilidad gerencial desde software de Data Logging</h3>
+          <div class="case-block"><strong>Desafío</strong>Exportaciones complejas de aplicaciones mineras que dificultaban ver la concentración por sondaje y dominio en tiempo real.</div>
+          <div class="case-block"><strong>Solución</strong>Pipeline automatizado que ingiere datos de perforación, valida reglas QA/QC y genera dashboards interactivos asistidos por IA.</div>
+          <div class="case-metric"><svg class="ic"><use href="#i-check"/></svg>Análisis de horas reducido a lectura inmediata</div>
+        </article>
+
+        <article class="card case-card reveal" style="--i:1">
+          <span class="case-sector">Desarrollo Web · Operaciones</span>
+          <h3>Planificación y registro de labores mineras sin Excel</h3>
+          <div class="case-block"><strong>Desafío</strong>La consolidación manual en hojas de cálculo generaba desorden, versiones duplicadas e inconsistencias entre turnos.</div>
+          <div class="case-block"><strong>Solución</strong>Plataforma web centralizada para registrar avances diarios, métricas de producción y seguimiento semanal con control de acceso.</div>
+          <div class="case-metric"><svg class="ic"><use href="#i-check"/></svg>Trazabilidad única por turno y frente de trabajo</div>
+        </article>
+
+        <article class="card case-card reveal" style="--i:2">
+          <span class="case-sector">Logística Minera · Low Code</span>
+          <h3>Control de cadena de suministro y despachos en campo</h3>
+          <div class="case-block"><strong>Desafío</strong>Falta de monitoreo continuo entre planta, almacén y unidad minera que retrasaba aprobaciones y control de stock.</div>
+          <div class="case-block"><strong>Solución</strong>Aplicación ligera conectada a tableros gerenciales para registrar traslados, guías y aprobaciones en tiempo real.</div>
+          <div class="case-metric"><svg class="ic"><use href="#i-check"/></svg>Aprobaciones logísticas ágiles de 48h a pocas horas</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= REGULACIONES Y CUMPLIMIENTO EN PERÚ ================= -->
+  <section id="regulaciones">
+    <div class="wrap">
+      <div class="card reg-banner reveal">
+        <div class="sec-head" style="margin-bottom:8px">
+          <span class="kicker">05 · Cumplimiento Normativo &amp; Seguridad en Perú</span>
+          <h2>Diseñamos tus sistemas con pleno conocimiento de las regulaciones peruanas</h2>
+          <p class="sub">No vendemos auditorías legales: desarrollamos tu infraestructura de BI, software e IA incorporando desde el diseño los controles técnicos que exigen las leyes de protección de datos y estándares internacionales de seguridad de la información en el Perú.</p>
+        </div>
+
+        <div class="reg-grid">
+          <div class="reg-card">
+            <div class="reg-badge"><svg class="ic" style="width:15px;height:15px"><use href="#i-shield"/></svg> MARCO LEGAL PERÚ</div>
+            <h3>Protección de Datos Personales (Ley N.° 29733)</h3>
+            <p>Implementamos flujos de datos alineados con la Ley N.° 29733 y su Reglamento (D.S. 003-2013-JUS) para ayudarte a cumplir con la normativa peruana en tus plataformas y analítica.</p>
+            <div class="kw-row">
+              <span class="kw">Consentimiento</span><span class="kw">Finalidad</span><span class="kw">Calidad</span><span class="kw">Proporcionalidad</span><span class="kw">Confidencialidad</span>
+            </div>
+          </div>
+
+          <div class="reg-card">
+            <div class="reg-badge"><svg class="ic" style="width:15px;height:15px"><use href="#i-shield"/></svg> SEGURIDAD DE LA INFORMACIÓN</div>
+            <h3>Estándares ISO/IEC 27001 y Resguardo Corporativo</h3>
+            <p>Protegemos la disponibilidad, confidencialidad e integridad de tus datos estratégicos, modelos geológicos y reportes gerenciales frente a accesos no autorizados.</p>
+            <div class="kw-row">
+              <span class="kw">Control de Accesos</span><span class="kw">Cifrado</span><span class="kw">Segregación</span><span class="kw">Respaldo</span>
+            </div>
+          </div>
+
+          <div class="reg-card">
+            <div class="reg-badge"><svg class="ic" style="width:15px;height:15px"><use href="#i-shield"/></svg> CALIDAD &amp; TRAZABILIDAD</div>
+            <h3>Sistema Integrado de Gestión (ISO 9001 &amp; QA/QC)</h3>
+            <p>Aseguramos la calidad de cada entrega con validación automatizada de datos, control de versiones y linaje reproducible desde la fuente cruda hasta el tablero final.</p>
+            <div class="kw-row">
+              <span class="kw">Linaje de Datos</span><span class="kw">QA/QC Automático</span><span class="kw">Mejora Continua</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="reg-actions">
+          <button class="btn sm" data-policy="datos"><svg class="ic"><use href="#i-shield"/></svg>Política de Protección de Datos Personales</button>
+          <button class="btn sm" data-policy="sig"><svg class="ic"><use href="#i-layers"/></svg>Política de Sistema Integrado de Gestión</button>
+          <button class="btn sm" data-policy="privacidad"><svg class="ic"><use href="#i-globe"/></svg>Política de Privacidad</button>
+          <span class="reg-note">Acompañamiento técnico para cumplimiento normativo · Sin servicios de auditoría externa.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PREGUNTAS FRECUENTES ================= -->
+  <section id="faq" class="tight">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">06 · Preguntas Frecuentes</span>
+        <h2>Resolvemos tus dudas antes de empezar</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>¿Qué tipo de soluciones ofrecen para empresas mineras e industriales?<svg class="ic"><use href="#i-chev"/></svg></summary>
+          <div class="faq-ans">Ofrecemos un portafolio completo que abarca <strong>Business Intelligence (BI)</strong>, analítica geológica y de <em>data logging</em>, desarrollo de software a medida con Inteligencia Artificial, agentes automatizados de reporte y aplicaciones ligeras para captura en campo. Puedes contratar una solución puntual o un proyecto integral.</div>
+        </details>
+        <details class="faq-item">
+          <summary>¿Se conectan al software geológico, ERP o archivos que ya usamos en la empresa?<svg class="ic"><use href="#i-chev"/></svg></summary>
+          <div class="faq-ans">Sí. Nuestro enfoque consiste en integrarnos con las fuentes que tu operación ya utiliza —software de <em>geo-logging</em>, bases de datos SQL, ERPs, APIs o exportaciones CSV/Excel— para automatizar la limpieza, la validación QA/QC y la visualización ejecutiva sin interrumpir tu trabajo diario.</div>
+        </details>
+        <details class="faq-item">
+          <summary>¿Cómo nos ayudan con la Ley de Protección de Datos Personales (Ley N.° 29733) en Perú?<svg class="ic"><use href="#i-chev"/></svg></summary>
+          <div class="faq-ans">Conocemos las regulaciones vigentes en el Perú y diseñamos la arquitectura de nuestras aplicaciones y tableros para ayudarte a cumplirlas desde el primer día (control de acceso, consentimiento, confidencialidad, minimización y trazabilidad de tratamiento de datos).</div>
+        </details>
+        <details class="faq-item">
+          <summary>¿La información confidencial de nuestros sondajes o finanzas se comparte con terceros?<svg class="ic"><use href="#i-chev"/></svg></summary>
+          <div class="faq-ans">Nunca. Todas las implementaciones se despliegan en entornos privados bajo control del cliente, aplicando principios de seguridad alineados a ISO/IEC 27001. Los tableros mostrados en este sitio web utilizan exclusivamente conjuntos de datos sintéticos demostrativos.</div>
+        </details>
+        <details class="faq-item">
+          <summary>¿Cómo podemos coordinar una reunión o piloto rápido?<svg class="ic"><use href="#i-chev"/></svg></summary>
+          <div class="faq-ans">Sin formularios largos: llámanos directamente, escríbenos por WhatsApp o envíanos un correo a nuestra oficina en <strong>La Molina, Lima – Perú</strong>. Evaluamos tu desafío y te proponemos una ruta clara con un prototipo funcional en marcha blanca.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACTO DIRECTO (SIN FORMULARIO) ================= -->
+  <section id="contacto">
+    <div class="wrap">
+      <div class="card contact-box reveal">
+        <div>
+          <span class="kicker">07 · Contacto Directo</span>
+          <h2>Cuéntanos tu desafío operativo o tecnológico</h2>
+          <p>Comunicación directa y sin intermediarios. Atendemos proyectos en minería, logística y empresas corporativas en todo el Perú desde nuestra sede en <strong>La Molina, Lima</strong>.</p>
+          <div class="hero-ctas" style="margin-bottom:0">
+            <a class="btn primary" data-cfg-href="whatsappHref" href="https://wa.me/51999000000" target="_blank" rel="noopener">
+              <svg class="ic"><use href="#i-phone"/></svg>Escribir por WhatsApp
+            </a>
+            <a class="btn" data-cfg-href="emailHref" href="mailto:contacto@geoandina.pe">
+              <svg class="ic"><use href="#i-mail"/></svg>Enviar Correo
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-cards">
+          <div class="c-card">
+            <span class="c-lbl">Teléfono / Celular</span>
+            <div class="c-val" data-cfg="phone">+51 999 000 000</div>
+            <div class="c-sub">Atención directa y WhatsApp corporativo</div>
+            <div class="c-btns">
+              <a class="btn sm" data-cfg-href="phoneHref" href="tel:+51999000000">Llamar</a>
+            </div>
+          </div>
+
+          <div class="c-card">
+            <span class="c-lbl">Correo Electrónico</span>
+            <div class="c-val" data-cfg="email">contacto@geoandina.pe</div>
+            <div class="c-sub">Consultas comerciales y demos</div>
+            <div class="c-btns">
+              <button class="btn sm" id="btnCopyEmail" type="button"><svg class="ic" style="width:14px;height:14px"><use href="#i-copy"/></svg>Copiar</button>
+            </div>
+          </div>
+
+          <div class="c-card">
+            <span class="c-lbl">Oficina Lima</span>
+            <div class="c-val" data-cfg="city">La Molina, Lima – Perú</div>
+            <div class="c-sub" data-cfg="address">Av. La Molina, La Molina 15024, Lima</div>
+            <div class="c-btns">
+              <span class="mono" style="font-size:11px;color:var(--ok)">● Atención nacional</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="margin-bottom:12px">
+          <svg class="crys" viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M20 3 33 12v16L20 37 7 28V12L20 3Z" fill="none" stroke="var(--cu2)" stroke-width="2.4" stroke-linejoin="round"/>
+            <circle cx="20" cy="20" r="3.2" fill="var(--cu2)"/>
+          </svg>
+          <div>
+            <div class="brand-title"><span data-cfg="brandShort">Geoandina</span> · <em>Analytics &amp; IA</em></div>
+            <small class="mono">BI · DATA LOGGING · SOFTWARE A MEDIDA</small>
+          </div>
+        </div>
+        <p style="font-size:13.5px;color:var(--text2);max-width:380px">
+          Consultoría tecnológica, Business Intelligence e Inteligencia Artificial aplicada al sector minero y empresarial en Perú.
+        </p>
+      </div>
+
+      <div class="foot-links">
+        <h4>Navegación</h4>
+        <a href="#nosotros">Nuestros Pilares</a>
+        <a href="#lineas-de-negocio">Líneas de Negocio</a>
+        <a href="#demo-interactiva">Demo Interactiva</a>
+        <a href="portal-geometalurgico.html">Workbench Geometalúrgico v3.1</a>
+        <a href="#contacto">Contacto Directo</a>
+      </div>
+
+      <div class="foot-links">
+        <h4>Marco Legal &amp; Políticas (Perú)</h4>
+        <button type="button" data-policy="datos">Política de Protección de Datos Personales (Ley 29733)</button>
+        <button type="button" data-policy="sig">Política de Sistema Integrado de Gestión</button>
+        <button type="button" data-policy="privacidad">Política de Privacidad</button>
+        <span style="margin-top:6px;font-size:12.5px;color:var(--text3)" data-cfg="city">La Molina, Lima – Perú</span>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© <span data-cfg="year">2026</span> <span data-cfg="brandFull">Geoandina Tech &amp; Analytics</span> · Todos los derechos reservados.</span>
+      <span class="mono">La Molina, Lima – Perú · GitHub + Vercel Static Ready</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= MODAL DETALLE LÍNEA DE NEGOCIO ================= -->
+<dialog id="dlgLine" aria-label="Detalle de línea de negocio">
+  <div class="dlg-head">
+    <div class="line-ico" id="dlgLineIco"></div>
+    <div>
+      <h3 id="dlgLineTitle">Línea de Negocio</h3>
+      <div class="sub" id="dlgLineSub">Metodología de implementación</div>
+    </div>
+    <button class="btn icon sm x dlg-close" aria-label="Cerrar detalle"><svg class="ic"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="dlg-body" id="dlgLineBody"></div>
+</dialog>
+
+<!-- ================= MODAL POLÍTICAS Y NORMATIVA PERÚ ================= -->
+<dialog id="dlgPolicy" aria-label="Política de cumplimiento normativo">
+  <div class="dlg-head">
+    <svg class="ic" style="color:var(--cu2);width:22px;height:22px"><use href="#i-shield"/></svg>
+    <div>
+      <h3 id="dlgPolicyTitle">Política</h3>
+      <div class="sub" id="dlgPolicySub">Marco normativo aplicable en Perú</div>
+    </div>
+    <button class="btn icon sm x dlg-close" aria-label="Cerrar política"><svg class="ic"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="dlg-body" id="dlgPolicyBody"></div>
+</dialog>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ================================================================
+   CONFIGURACIÓN RÁPIDA DEL SITIO (EDITA AQUÍ TUS DATOS DE CONTACTO)
+================================================================ */
+const SITE_CONFIG = {
+  brandShort: 'Geoandina',
+  brandFull: 'Geoandina Tech & Analytics',
+  brandSub: 'SOLUCIONES TECNOLÓGICAS PARA MINERÍA · PERÚ',
+  parentCompany: 'Geoandina',
+  phone: '+51 999 000 000',
+  phoneHref: 'tel:+51999000000',
+  whatsappHref: 'https://wa.me/51999000000',
+  email: 'contacto@geoandina.pe',
+  emailHref: 'mailto:contacto@geoandina.pe',
+  city: 'La Molina, Lima – Perú',
+  address: 'Av. La Molina, La Molina 15024, Lima',
+  year: '2026'
+};
+
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const NF0 = new Intl.NumberFormat('es-PE', { maximumFractionDigits: 0 });
+const NF1 = new Intl.NumberFormat('es-PE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const NF2 = new Intl.NumberFormat('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function applySiteConfig() {
+  $$('[data-cfg]').forEach(el => {
+    const k = el.getAttribute('data-cfg');
+    if (SITE_CONFIG[k] != null) el.textContent = SITE_CONFIG[k];
+  });
+  $$('[data-cfg-href]').forEach(el => {
+    const k = el.getAttribute('data-cfg-href');
+    if (SITE_CONFIG[k] != null) el.setAttribute('href', SITE_CONFIG[k]);
+  });
+}
+
+/* ================================================================
+   TEMA CLARO / OSCURO + MENÚ MÓVIL + TOASTS
+================================================================ */
+function setTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  $('#themeIc').innerHTML = theme === 'light' ? '<use href="#i-moon"/>' : '<use href="#i-sun"/>';
+  try { localStorage.setItem('geoandina_theme', theme); } catch (e) {}
+  requestDraw();
+}
+$('#btnTheme').addEventListener('click', () => {
+  setTheme(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light');
+});
+try {
+  const savedTheme = localStorage.getItem('geoandina_theme');
+  if (savedTheme === 'light' || savedTheme === 'dark') setTheme(savedTheme);
+} catch (e) {}
+
+const nav = $('#mainNav');
+$('#btnMenu').addEventListener('click', () => {
+  const open = nav.classList.toggle('open');
+  $('#btnMenu').setAttribute('aria-expanded', String(open));
+});
+$$('#mainNav a').forEach(a => a.addEventListener('click', () => {
+  nav.classList.remove('open');
+  $('#btnMenu').setAttribute('aria-expanded', 'false');
+}));
+
+function toast(msg) {
+  const box = $('#toasts');
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  box.appendChild(t);
+  setTimeout(() => t.remove(), 3400);
+}
+
+$('#btnCopyEmail').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(SITE_CONFIG.email);
+    toast('Correo copiado: ' + SITE_CONFIG.email);
+  } catch (e) {
+    toast('Correo: ' + SITE_CONFIG.email);
+  }
+});
+
+/* ================================================================
+   9 LÍNEAS DE NEGOCIO (BASADAS EN TOUCH CONSULTING + MINERÍA/IA)
+================================================================ */
+const BUSINESS_LINES = [
+  {
+    id: 'bi',
+    featured: true,
+    tag: 'Línea Estrella',
+    icon: '#i-chart',
+    title: 'Data Analytics & Business Intelligence (BI)',
+    short: 'Maximizamos el control operativo y aceleramos la toma de decisiones gerenciales extrayendo valor real de tus datos con IA.',
+    deliverables: [
+      'Dashboards ejecutivos para gerencia general, operaciones y geología.',
+      'Extracción automática de insights con Inteligencia Artificial sobre KPIs críticos.',
+      'Consolidación de múltiples fuentes (ERP, Excel, SQL, reportes de planta).'
+    ],
+    benefits: ['Visibilidad diaria sin esperar cierres manuales', 'Detección temprana de desvíos operativos', 'Decisiones respaldadas en estadística robusta']
+  },
+  {
+    id: 'geomet',
+    featured: true,
+    tag: 'Especialidad Minería',
+    icon: '#i-layers',
+    title: 'Analítica Geometalúrgica & Data Logging',
+    short: 'Convertimos exportaciones complejas de software de data logging minero en vistas espaciales, curvas de leyes y control QA/QC.',
+    deliverables: [
+      'Portales interactivos con vistas de planta, sección vertical/diagonal y sondajes.',
+      'Clasificación automatizada por dominios geometalúrgicos y cálculo de NSR.',
+      'Validación automática de reglas QA/QC por muestra y trazabilidad completa.'
+    ],
+    benefits: ['Cero dependencia de archivos planos ilegibles', 'Lectura inmediata para geólogos y gerentes', 'Control de censura analítica y anomalías']
+  },
+  {
+    id: 'sw-ia',
+    featured: false,
+    tag: 'Ingeniería + IA',
+    icon: '#i-cpu',
+    title: 'Desarrollo de Software + IA',
+    short: 'Creamos software y aplicaciones web a medida para automatizar procesos críticos, reducir errores manuales y acceder a información en tiempo real.',
+    deliverables: [
+      'Aplicaciones web corporativas e industriales con arquitectura escalable.',
+      'Módulos de procesamiento inteligente de documentos, guías y reportes técnicos.',
+      'APIs seguras para comunicar tus sistemas internos.'
+    ],
+    benefits: ['Automatización de flujos repetitivos', 'Menor tiempo de respuesta entre áreas', 'Software propio adaptado a tu regla de negocio']
+  },
+  {
+    id: 'agentes',
+    featured: false,
+    tag: 'Automatización',
+    icon: '#i-bot',
+    title: 'Agentes IA & Automatización de Reportes',
+    short: 'Asistentes inteligentes para consultar bases de datos operativas en lenguaje natural, resumir guardias y emitir alertas automáticas.',
+    deliverables: [
+      'Copilotos internos para consultar producción, leyes, stock y logística.',
+      'Generación automática de resúmenes ejecutivos diarios para gerencia.',
+      'Integración segura con control de permisos por rol.'
+    ],
+    benefits: ['Respuestas operativas en segundos', 'Reducción de carga administrativa', 'Información disponible 24/7']
+  },
+  {
+    id: 'erp',
+    featured: false,
+    tag: 'Integración',
+    icon: '#i-db',
+    title: 'Integración con Software Minero & ERP',
+    short: 'Conectamos tus aplicaciones geológicas, sistemas de gestión logística y ERP para unificar la información sin duplicar digitación.',
+    deliverables: [
+      'Conectores ETL/ELT hacia SQL Server, PostgreSQL, BigQuery o archivos de campo.',
+      'Estandarización de catálogos (litologías, frentes, centros de costo, contratas).',
+      'Monitoreo de calidad e integridad entre sistemas.'
+    ],
+    benefits: ['Una sola fuente de verdad operativa', 'Fin de las versiones conflictivas en Excel', 'Trazabilidad punta a punta']
+  },
+  {
+    id: 'lowcode',
+    featured: false,
+    tag: 'Agilidad en Campo',
+    icon: '#i-grid',
+    title: 'Low Code Apps & Captura en Campo',
+    short: 'Digitalizamos inspecciones, registro de labores, checklists de seguridad y despachos logísticos en menos tiempo.',
+    deliverables: [
+      'Formularios móviles y web para supervisores de guardia y almacén.',
+      'Flujos de aprobación rápida de suministros y requerimientos.',
+      'Sincronización directa con tableros de Business Intelligence.'
+    ],
+    benefits: ['Despliegue rápido en semanas', 'Eliminación de cuadernos y papel en mina', 'Datos estructurados desde el origen']
+  },
+  {
+    id: 'ciber',
+    featured: false,
+    tag: 'Seguridad & Ley 29733',
+    icon: '#i-shield',
+    title: 'Ciberseguridad & Gobierno de Datos',
+    short: 'Resguardamos la información sensible de tu operación con controles técnicos alineados a ISO 27001 y la Ley de Protección de Datos en Perú.',
+    deliverables: [
+      'Diseño de roles, privilegios mínimos y encriptación en aplicaciones y tableros.',
+      'Implementación técnica de principios de la Ley N.° 29733 en captura y reportes.',
+      'Bitácoras de auditoría técnica y linaje de modificaciones.'
+    ],
+    benefits: ['Protección de data geológica y corporativa', 'Preparación técnica frente a normativas peruanas', 'Control total sobre quién accede a cada dato']
+  },
+  {
+    id: 'consultoria',
+    featured: false,
+    tag: 'Estrategia',
+    icon: '#i-compass',
+    title: 'Consultoría y Capacitación en Datos + IA',
+    short: 'Acompañamos a tu equipo a definir su estrategia de datos, ordenar su gobierno de información y adoptar herramientas de IA en la práctica.',
+    deliverables: [
+      'Diagnóstico de madurez de datos y hoja de ruta priorizada por ROI.',
+      'Talleres prácticos para equipos de geología, logística y administración.',
+      'Acompañamiento gerencial en adopción tecnológica.'
+    ],
+    benefits: ['Inversión enfocada en impacto real', 'Equipos internos capacitados y autónomos', 'Adopción sostenible sin fricciones']
+  },
+  {
+    id: 'portales',
+    featured: false,
+    tag: 'Presencia & Sistemas',
+    icon: '#i-globe',
+    title: 'Portales Web & Plataformas Técnicas',
+    short: 'Implementamos portales corporativos de alto rendimiento, intranets de proveedores y visores web seguros para clientes y contratistas.',
+    deliverables: [
+      'Sitios corporativos y portales de proveedores con alta velocidad de carga.',
+      'Visores de reportes e indicadores publicados con acceso controlado.',
+      'Cumplimiento de políticas de privacidad y aviso legal local.'
+    ],
+    benefits: ['Presencia institucional moderna y confiable', 'Arquitectura liviana y mantenible', 'Comunicación clara de capacidades técnicas']
+  }
+];
+
+const METHODOLOGY_STEPS = [
+  ['Identificar los objetivos y necesidades', 'Entendemos el proceso minero, logístico o corporativo y definimos los KPIs reales que la gerencia necesita visualizar.'],
+  ['Recolección e ingeniería de datos', 'Conectamos con tus fuentes actuales (software de data logging, ERP, SQL o CSV) para limpiar y estructurar la data de forma confiable.'],
+  ['Analítica de datos, QA/QC e IA', 'Aplicamos reglas de control de calidad, estadística robusta y modelos de Inteligencia Artificial para detectar anomalías y hallazgos clave.'],
+  ['Pruebas en marcha blanca', 'Validamos el funcionamiento con usuarios reales (geólogos, supervisores o gerencia) garantizando precisión numérica y seguridad.'],
+  ['Visualización ejecutiva y despliegue', 'Entregamos dashboards interactivos claros y documentados, alineados con la normativa peruana de protección de datos.']
+];
+
+function renderLines() {
+  $('#linesGrid').innerHTML = BUSINESS_LINES.map((l, i) => `
+    <article class="card line-card reveal ${l.featured ? 'featured' : ''}" style="--i:${i % 3}" data-line-id="${l.id}" tabindex="0" role="button" aria-label="Ver detalles de ${l.title}">
+      <div class="line-top">
+        <div class="line-ico"><svg class="ic"><use href="${l.icon}"/></svg></div>
+        <span class="line-tag">${l.tag}</span>
+      </div>
+      <h3>${l.title}</h3>
+      <p>${l.short}</p>
+      <span class="line-more">Conocer metodología (5 etapas) <svg class="ic"><use href="#i-arrow"/></svg></span>
+    </article>
+  `).join('');
+
+  $$('.line-card').forEach(card => {
+    const open = () => openLineModal(card.getAttribute('data-line-id'));
+    card.addEventListener('click', open);
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+    });
+  });
+}
+
+function openLineModal(id) {
+  const l = BUSINESS_LINES.find(x => x.id === id);
+  if (!l) return;
+  $('#dlgLineIco').innerHTML = `<svg class="ic"><use href="${l.icon}"/></svg>`;
+  $('#dlgLineTitle').textContent = l.title;
+  $('#dlgLineSub').textContent = l.tag + ' · Metodología en 5 etapas';
+  $('#dlgLineBody').innerHTML = `
+    <p style="font-size:14.5px;color:var(--text2);margin-bottom:16px">${l.short}</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:18px">
+      <div class="policy-sec" style="margin:0">
+        <h4>Qué implementamos</h4>
+        <ul style="padding-left:18px;font-size:13px;color:var(--text2)">
+          ${l.deliverables.map(d => `<li style="margin-bottom:5px">${d}</li>`).join('')}
+        </ul>
+      </div>
+      <div class="policy-sec" style="margin:0">
+        <h4>Beneficios para tu operación</h4>
+        <ul style="padding-left:18px;font-size:13px;color:var(--text2)">
+          ${l.benefits.map(b => `<li style="margin-bottom:5px">${b}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+    <h4 style="font-size:13.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--cu2);margin-bottom:10px" class="mono">Metodología de Ejecución</h4>
+    <div class="step-list">
+      ${METHODOLOGY_STEPS.map((st, idx) => `
+        <div class="step-row">
+          <div class="step-num">${idx + 1}</div>
+          <div><h4>${st[0]}</h4><p>${st[1]}</p></div>
+        </div>
+      `).join('')}
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+      ${l.id === 'geomet' ? '<a class="btn" href="portal-geometalurgico.html">Ver Portal Geometalúrgico</a>' : ''}
+      <a class="btn primary" href="#contacto" id="dlgContactJump">Solicitar reunión informativa</a>
+    </div>
+  `;
+  const jump = $('#dlgContactJump');
+  if (jump) jump.addEventListener('click', () => $('#dlgLine').close());
+  $('#dlgLine').showModal();
+}
+
+/* ================================================================
+   POLÍTICAS NORMATIVAS EN PERÚ (MODALES)
+================================================================ */
+const POLICIES = {
+  datos: {
+    title: 'Política de Protección de Datos Personales',
+    sub: 'Marco de referencia: Ley N.° 29733 (Perú) y D.S. 003-2013-JUS',
+    sections: [
+      ['Finalidad y Alcance', 'Nuestras soluciones tecnológicas y tableros corporativos se diseñan respetando las medidas de seguridad necesarias para proteger la disponibilidad, confidencialidad e integridad de la información conforme a la Ley N.° 29733.'],
+      ['Principios de Consentimiento, Libertad y Legalidad', 'Todo flujo de captura de información personal implementado en nuestros desarrollos contempla el consentimiento previo, expreso e informado del titular, prohibiendo la recopilación por medios desleales o ilícitos.'],
+      ['Principios de Finalidad, Calidad y Proporcionalidad', 'Los datos tratados en nuestras plataformas de BI y software se limitan estrictamente a los fines operativos declarados, manteniendo estándares de exactitud y actualización sin recopilar información excesiva.'],
+      ['Principio de Seguridad y Confidencialidad', 'Aplicamos controles técnicos de acceso por roles, segregación de ambientes y reserva estricta de la información tratada por el personal y los sistemas involucrados.']
+    ]
+  },
+  sig: {
+    title: 'Política de Sistema Integrado de Gestión',
+    sub: 'Calidad operativa (ISO 9001) y Seguridad de la Información (ISO/IEC 27001)',
+    sections: [
+      ['1. Cumplimiento de Requisitos Aplicables', 'Diseñamos cada solución satisfaciendo los requerimientos técnicos acordados con el cliente y respetando las normativas vigentes aplicables en el Perú para el sector minero y empresarial.'],
+      ['2. Protección de la Información', 'Implementamos controles efectivos para resguardar datos geológicos, productivos y corporativos frente a accesos no autorizados, pérdida o alteración accidental.'],
+      ['3. Mejora Continua y Trazabilidad', 'Cada cálculo analítico en nuestros tableros conserva trazabilidad documentada (linaje de datos y reglas QA/QC) para garantizar transparencia en la toma de decisiones.'],
+      ['4. Cumplimiento Normativo (Sin Auditorías Externas)', 'Nuestro rol es brindar soporte técnico y arquitectura de software para ayudar a la empresa cliente a cumplir con sus obligaciones regulatorias internas y legales.']
+    ]
+  },
+  privacidad: {
+    title: 'Política de Privacidad del Sitio Web',
+    sub: 'Sitio informativo estático · Cero rastreo invasivo',
+    sections: [
+      ['Uso Informativo sin Formularios de Captura', 'Este sitio web actúa como portafolio de presentación directa. No recopila datos mediante formularios web ni instala cookies publicitarias o de rastreo comercial de terceros.'],
+      ['Datos de Demostración Sintéticos', 'Todos los sondajes, leyes de Cobre, Molibdeno, Oro y gráficos interactivos presentes en la sección Demo y en el Portal Geometalúrgico son datos sintéticos generados algorítmicamente. No corresponden a ninguna operación minera real ni confidencial.'],
+      ['Contacto Directo', 'Al comunicarse por teléfono, WhatsApp o correo electrónico con ' + SITE_CONFIG.brandFull + ', su consulta se atiende de manera confidencial exclusivamente para fines comerciales o técnicos solicitados.']
+    ]
+  }
+};
+
+$$('[data-policy]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const p = POLICIES[btn.getAttribute('data-policy')];
+    if (!p) return;
+    $('#dlgPolicyTitle').textContent = p.title;
+    $('#dlgPolicySub').textContent = p.sub;
+    $('#dlgPolicyBody').innerHTML = p.sections.map(s => `
+      <div class="policy-sec"><h4>${s[0]}</h4><p>${s[1]}</p></div>
+    `).join('');
+    $('#dlgPolicy').showModal();
+  });
+});
+
+$$('.dlg-close').forEach(btn => btn.addEventListener('click', e => e.target.closest('dialog').close()));
+$$('dialog').forEach(d => d.addEventListener('click', e => { if (e.target === d) d.close(); }));
+
+/* ================================================================
+   MOTOR DEMO SEMIANIMADO (MISMO DATASET SINTÉTICO PÓRFIDO Cu-Mo)
+================================================================ */
+const CLASSES = [
+  { id: 'G1', name: 'Alta ley · Flotación', color: '#f28c38' },
+  { id: 'G2', name: 'Ley media · Bulk', color: '#4da3ff' },
+  { id: 'G3', name: 'Marginal · Acopio', color: '#e8c04a' },
+  { id: 'G4', name: 'Estéril · Lastre', color: '#8b93a3' },
+  { id: 'G5', name: 'Penalizable Pb+Zn', color: '#c95bd8' }
+];
+const CLS = Object.fromEntries(CLASSES.map(c => [c.id, c]));
+const LITHO = {
+  PCM: { name: 'Pórfido cuarzomonzonítico', color: '#e0762f' },
+  PDF: { name: 'Pórfido dacítico', color: '#d9a441' },
+  BXH: { name: 'Brecha hidrotermal', color: '#9a6cf0' },
+  DQT: { name: 'Dique cuarzo-tourmalina', color: '#58b368' },
+  AND: { name: 'Andesita', color: '#4fa3a5' }
+};
+
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    let t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+
+function genSyntheticData() {
+  const rng = mulberry32(20261117);
+  const g = () => Math.sqrt(-2 * Math.log(1 - rng())) * Math.cos(2 * Math.PI * rng());
+  const holes = [
+    ['EVR-DDH-001', 2450, 4720, 4660, -90, 0, 312],
+    ['EVR-DDH-002', 2620, 4680, 4645, -75, 35, 268],
+    ['EVR-DDH-003', 2790, 4760, 4630, -90, 0, 340],
+    ['EVR-DDH-004', 2540, 4880, 4615, -70, 120, 296],
+    ['EVR-DDH-005', 2700, 4900, 4598, -90, 0, 252],
+    ['EVR-DDH-006', 2860, 4850, 4580, -78, 210, 324],
+    ['EVR-DDH-007', 2600, 4790, 4652, -90, 0, 288],
+    ['EVR-DDH-008', 2750, 4640, 4620, -68, 300, 304]
+  ];
+  const BASE = { PCM: 2600, PDF: 1500, AND: 480, BXH: 1900, DQT: 900 };
+  const LB = 2204.6226, OZ = 31.10348;
+  const out = [];
+  let n = 0;
+
+  holes.forEach((h, hi) => {
+    const [id, hx, hy, hz, dip, az, len] = h;
+    const dr = dip * Math.PI / 180, ar = az * Math.PI / 180;
+    const dx = Math.cos(dr) * Math.sin(ar), dy = Math.cos(dr) * Math.cos(ar), dz = Math.sin(dr);
+    let lith = 'AND';
+    for (let i = 0; i * 2 < len; i++) {
+      if ((hi === 2 && i === 41) || (hi === 5 && i === 57)) continue;
+      const from = i * 2, to = from + 2, mid = (from + to) / 2;
+      const x = hx + dx * mid + (rng() - 0.5) * 1.2;
+      const y = hy + dy * mid + (rng() - 0.5) * 1.2;
+      const z = hz + dz * mid;
+      if (mid >= 34 && (lith === 'AND' || rng() < 0.16)) {
+        const r = rng();
+        lith = r < 0.5 ? 'PCM' : r < 0.7 ? 'PDF' : r < 0.85 ? 'BXH' : r < 0.93 ? 'DQT' : 'AND';
+      }
+      const f = Math.exp(-(Math.pow((x - 2680) / 230, 2) + Math.pow((y - 4800) / 260, 2) + Math.pow((z - 4430) / 170, 2)));
+      let cu = Math.max(12, Math.round(BASE[lith] * (0.22 + 1.95 * f) * Math.exp(g() * 0.55)));
+      if (cu > 10000) cu = 10000;
+      n++;
+      let ratio = clamp(45 * Math.exp(g() * 0.42), 4, 600);
+      if (n === 137 || n === 512 || n === 863) ratio = 720;
+      const mo = Math.max(0.4, Math.round(cu / ratio * 10) / 10);
+      const au = Math.round((0.012 + 0.5 * f * Math.exp(g() * 0.8)) * 1000) / 1000;
+      const ag = Math.round((0.25 + (cu / 1600) * Math.exp(g() * 0.6)) * 100) / 100;
+      const sh = clamp((z - 4330) / 280, 0, 1);
+      const pb = Math.round((28 + 430 * sh * (1 - 0.7 * f)) * Math.exp(g() * 0.65));
+      const zn = Math.round((55 + 1500 * sh * (1 - 0.8 * f)) * Math.exp(g() * 0.6));
+      const pbzn = pb + zn;
+      const cls = (cu >= 1000 && pbzn >= 2000) ? 'G5' : cu >= 5000 ? 'G1' : cu >= 2000 ? 'G2' : cu >= 1000 ? 'G3' : 'G4';
+      let rec = 52 + 41 * (1 - Math.exp(-cu / 2600));
+      if (pbzn >= 2000) rec -= 7;
+      rec = clamp(rec, 35, 93);
+      const nsr = Math.max(0, (cu / 1e6 * LB * 4.15 * 0.965 * rec / 100) + (mo / 1e6 * LB * 21 * 0.9 * (mo >= 100 ? 0.7 : 0.5)) + (au / OZ * 2385 * 0.62) + (ag / OZ * 29.5 * 0.7) - 3.2 - (pbzn >= 2000 ? 4.5 : 0));
+      const qc = (cu >= 10000 || ratio > 500) ? 'WARN' : 'OK';
+      out.push({
+        bhid: id, from, to, litho: lith, sample: 'EVR-' + String(n).padStart(6, '0'),
+        cu, mo, au, pbzn, cls, nsr, qc, x, y, z, zCollar: hz
+      });
+    }
+  });
+  return out;
+}
+
+const ALL_ROWS = genSyntheticData();
+const HOLE_META = new Map();
+ALL_ROWS.forEach(r => {
+  if (!HOLE_META.has(r.bhid)) HOLE_META.set(r.bhid, { id: r.bhid, x: r.x, y: r.y, collarZ: r.zCollar, rows: [] });
+  HOLE_META.get(r.bhid).rows.push(r);
+});
+
+const DEMO = {
+  clsFilter: 'ALL',
+  depth: 500,
+  autoPlay: !RM,
+  hoverId: null,
+  scanPhase: 0,
+  filtered: ALL_ROWS
+};
+
+function quantile(arr, q) {
+  if (!arr.length) return 0;
+  const s = arr.slice().sort((a, b) => a - b);
+  const i = (s.length - 1) * q, lo = Math.floor(i), hi = Math.ceil(i);
+  return s[lo] + (s[hi] - s[lo]) * (i - lo);
+}
+
+function buildDemoChips() {
+  const wrap = $('#demoClassChips');
+  const items = [{ id: 'ALL', label: 'Todos los dominios', color: '#e0762f' }]
+    .concat(CLASSES.map(c => ({ id: c.id, label: `${c.id} · ${c.name.split('·')[0].trim()}`, color: c.color })));
+  wrap.innerHTML = items.map(it => `
+    <button class="chip" style="--c:${it.color}" data-dcls="${it.id}" aria-pressed="${DEMO.clsFilter === it.id}">
+      <span class="cd"></span>${it.label}
+    </button>
+  `).join('');
+
+  $$('#demoClassChips .chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      pauseAutoPlay();
+      DEMO.clsFilter = btn.getAttribute('data-dcls');
+      $$('#demoClassChips .chip').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+      updateDemoData();
+    });
+  });
+}
+
+function updateDemoData() {
+  DEMO.filtered = ALL_ROWS.filter(r => {
+    if (DEMO.clsFilter !== 'ALL' && r.cls !== DEMO.clsFilter) return false;
+    if (r.z < r.zCollar - DEMO.depth) return false;
+    return true;
+  });
+
+  const rs = DEMO.filtered;
+  const cuArr = rs.map(r => r.cu);
+  const moArr = rs.map(r => r.mo);
+  const nsrArr = rs.map(r => r.nsr);
+  const auMean = rs.length ? rs.reduce((a, r) => a + r.au, 0) / rs.length : 0;
+  const meters = rs.reduce((a, r) => a + (r.to - r.from), 0);
+
+  $('#dkN').innerHTML = `${NF0.format(rs.length)}<small>/ ${NF0.format(ALL_ROWS.length)}</small>`;
+  $('#dkNSub').textContent = `${NF0.format(meters)} m perforados · ${new Set(rs.map(r => r.bhid)).size} sondajes`;
+  $('#dkCu').innerHTML = rs.length ? `${NF0.format(Math.round(quantile(cuArr, 0.5)))}<small>ppm</small>` : '—';
+  $('#dkCuSub').textContent = rs.length ? `P90 ${NF0.format(Math.round(quantile(cuArr, 0.9)))} ppm` : 'Sin muestras';
+  $('#dkMo').innerHTML = rs.length ? `${NF1.format(quantile(moArr, 0.5))}<small>ppm</small>` : '—';
+  $('#dkAuSub').textContent = `Au promedio ${auMean.toFixed(3)} ppm`;
+  $('#dkNsr').innerHTML = rs.length ? `${NF2.format(quantile(nsrArr, 0.5))}<small>US$/t</small>` : '—';
+
+  renderLithoBars(rs);
+  renderDemoTable(rs);
+  requestDraw();
+}
+
+function renderLithoBars(rs) {
+  const rows = Object.entries(LITHO).map(([k, info]) => {
+    const vals = rs.filter(r => r.litho === k).map(r => r.cu);
+    return { k, info, med: vals.length ? quantile(vals, 0.5) : 0, n: vals.length };
+  });
+  const maxMed = Math.max(1000, ...rows.map(r => r.med));
+  $('#lithoBars').innerHTML = rows.map(r => `
+    <div class="lrow">
+      <div class="lrow-name"><b>${r.k}</b><span title="${r.info.name}">${r.info.name}</span></div>
+      <div class="lrow-bar"><i style="width:${(r.med / maxMed * 100).toFixed(1)}%;background:${r.info.color}"></i></div>
+      <div class="lrow-val">${r.n ? NF0.format(Math.round(r.med)) + ' ppm' : '—'}</div>
+    </div>
+  `).join('');
+}
+
+function renderDemoTable(rs) {
+  const top = rs.slice().sort((a, b) => b.cu - a.cu).slice(0, 18);
+  $('#tblCountLbl').textContent = `Top ${top.length} de ${NF0.format(rs.length)} muestras`;
+  $('#demoTblBody').innerHTML = top.length ? top.map(r => {
+    const c = CLS[r.cls];
+    return `
+      <tr data-sample="${r.sample}" class="${DEMO.hoverId === r.sample ? 'hov' : ''}">
+        <td class="mono" style="color:var(--text);font-weight:600">${r.sample}</td>
+        <td class="mono">${r.bhid.replace('EVR-', '')}</td>
+        <td class="mono">${r.from}–${r.to} m</td>
+        <td>${r.litho}</td>
+        <td class="num">${NF0.format(r.cu)}</td>
+        <td class="num">${NF1.format(r.mo)}</td>
+        <td class="num">${r.au.toFixed(3)}</td>
+        <td><span class="cls-pill" style="background:${c.color}28;color:${c.color}">${r.cls}</span></td>
+        <td><span class="${r.qc === 'OK' ? 'qc-ok' : 'qc-warn'}">${r.qc}</span></td>
+      </tr>
+    `;
+  }).join('') : '<tr><td colspan="9" style="text-align:center;padding:24px">Sin muestras en este corte de banco</td></tr>';
+
+  $$('#demoTblBody tr[data-sample]').forEach(tr => {
+    tr.addEventListener('mouseenter', () => setHoverSample(tr.getAttribute('data-sample')));
+    tr.addEventListener('mouseleave', () => setHoverSample(null));
+  });
+}
+
+/* ================================================================
+   RENDERIZADO CANVAS 2D SINCRONIZADO (SECCIÓN X-Z Y PLANTA X-Y)
+================================================================ */
+const CANV = {
+  sec: { el: $('#secCanvas'), wrap: $('#secWrap'), tip: $('#secTip'), ctx: $('#secCanvas').getContext('2d'), w: 0, h: 0, dpr: 1 },
+  plan: { el: $('#planCanvas'), wrap: $('#planWrap'), tip: $('#planTip'), ctx: $('#planCanvas').getContext('2d'), w: 0, h: 0, dpr: 1 }
+};
+
+function getPal() {
+  const cs = getComputedStyle(document.documentElement);
+  const g = k => cs.getPropertyValue(k).trim();
+  return { bg2: g('--bg2'), surface: g('--surface'), line: g('--line'), text: g('--text'), text2: g('--text2'), text3: g('--text3'), cu2: g('--cu2'), warn: g('--warn') };
+}
+
+function sizeCanvases() {
+  Object.values(CANV).forEach(v => {
+    const r = v.wrap.getBoundingClientRect();
+    v.dpr = Math.min(2, window.devicePixelRatio || 1);
+    v.w = Math.max(10, r.width);
+    v.h = Math.max(10, r.height);
+    v.el.width = Math.round(v.w * v.dpr);
+    v.el.height = Math.round(v.h * v.dpr);
+  });
+}
+
+const BOUNDS = (() => {
+  let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity, z0 = Infinity, z1 = -Infinity;
+  ALL_ROWS.forEach(r => {
+    x0 = Math.min(x0, r.x); x1 = Math.max(x1, r.x);
+    y0 = Math.min(y0, r.y); y1 = Math.max(y1, r.y);
+    z0 = Math.min(z0, r.z); z1 = Math.max(z1, r.zCollar);
+  });
+  return { x0: x0 - 45, x1: x1 + 45, y0: y0 - 45, y1: y1 + 45, z0: z0 - 25, z1: z1 + 30 };
+})();
+
+function project(key, x, val) {
+  const V = CANV[key], pad = { l: 44, r: 22, t: 24, b: 28 };
+  const pw = V.w - pad.l - pad.r, ph = V.h - pad.t - pad.b;
+  const px = pad.l + (x - BOUNDS.x0) / (BOUNDS.x1 - BOUNDS.x0) * pw;
+  const v0 = key === 'plan' ? BOUNDS.y0 : BOUNDS.z0;
+  const v1 = key === 'plan' ? BOUNDS.y1 : BOUNDS.z1;
+  const py = V.h - pad.b - (val - v0) / (v1 - v0) * ph;
+  return [px, py];
+}
+
+let drawQueued = false;
+function requestDraw() {
+  if (!drawQueued) {
+    drawQueued = true;
+    requestAnimationFrame(() => { drawQueued = false; drawView('sec'); drawView('plan'); });
+  }
+}
+
+function drawView(key) {
+  const V = CANV[key], ctx = V.ctx, w = V.w, h = V.h;
+  if (w < 20) return;
+  const pal = getPal();
+  ctx.setTransform(V.dpr, 0, 0, V.dpr, 0, 0);
+  ctx.clearRect(0, 0, w, h);
+
+  const grd = ctx.createLinearGradient(0, 0, 0, h);
+  grd.addColorStop(0, pal.surface);
+  grd.addColorStop(1, pal.bg2);
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, w, h);
+
+  // Grilla limpia
+  ctx.strokeStyle = pal.line;
+  ctx.lineWidth = 1;
+  ctx.fillStyle = pal.text3;
+  ctx.font = '10px "IBM Plex Mono", monospace';
+  for (let gx = 2450; gx <= 2900; gx += 100) {
+    const p = project(key, gx, key === 'plan' ? BOUNDS.y0 : BOUNDS.z0);
+    ctx.globalAlpha = 0.65;
+    ctx.beginPath(); ctx.moveTo(p[0], 18); ctx.lineTo(p[0], h - 22); ctx.stroke();
+    ctx.globalAlpha = 1;
+    ctx.textAlign = 'center';
+    ctx.fillText(gx + 'E', p[0], h - 8);
+  }
+  const vSteps = key === 'plan' ? [4650, 4750, 4850, 4950] : [4300, 4400, 4500, 4600];
+  vSteps.forEach(gv => {
+    const p = project(key, BOUNDS.x0, gv);
+    ctx.globalAlpha = 0.65;
+    ctx.beginPath(); ctx.moveTo(42, p[1]); ctx.lineTo(w - 16, p[1]); ctx.stroke();
+    ctx.globalAlpha = 1;
+    ctx.textAlign = 'right';
+    ctx.fillText(gv, 38, p[1] + 3);
+  });
+
+  // Trazas de sondajes
+  ctx.strokeStyle = pal.text3;
+  ctx.globalAlpha = 0.28;
+  ctx.lineWidth = 1.2;
+  HOLE_META.forEach(hm => {
+    ctx.beginPath();
+    hm.rows.forEach((r, idx) => {
+      const p = project(key, r.x, key === 'plan' ? r.y : r.z);
+      idx ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]);
+    });
+    ctx.stroke();
+  });
+  ctx.globalAlpha = 1;
+
+  // Línea de corte de banco Z en vista de sección
+  if (key === 'sec' && DEMO.depth < 500) {
+    ctx.strokeStyle = pal.warn;
+    ctx.setLineDash([5, 4]);
+    ctx.lineWidth = 1.4;
+    HOLE_META.forEach(hm => {
+      const zc = hm.collarZ - DEMO.depth;
+      const a = project('sec', hm.x - 18, zc), b = project('sec', hm.x + 18, zc);
+      ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
+    });
+    ctx.setLineDash([]);
+  }
+
+  // Puntos fantasma (fuera de filtro)
+  const filteredSet = new Set(DEMO.filtered.map(r => r.sample));
+  ctx.fillStyle = pal.text3;
+  ctx.globalAlpha = 0.14;
+  ctx.beginPath();
+  ALL_ROWS.forEach(r => {
+    if (filteredSet.has(r.sample)) return;
+    const p = project(key, r.x, key === 'plan' ? r.y : r.z);
+    ctx.moveTo(p[0] + 2.4, p[1]);
+    ctx.arc(p[0], p[1], 2.4, 0, Math.PI * 2);
+  });
+  ctx.fill();
+  ctx.globalAlpha = 1;
+
+  // Puntos activos agrupados por clase
+  const byCls = new Map();
+  DEMO.filtered.forEach(r => {
+    if (!byCls.has(r.cls)) byCls.set(r.cls, []);
+    byCls.get(r.cls).push(r);
+  });
+  byCls.forEach((arr, cid) => {
+    ctx.fillStyle = CLS[cid].color;
+    ctx.globalAlpha = 0.88;
+    ctx.beginPath();
+    arr.forEach(r => {
+      const p = project(key, r.x, key === 'plan' ? r.y : r.z);
+      const rad = cid === 'G1' ? 4.2 : 3.2;
+      ctx.moveTo(p[0] + rad, p[1]);
+      ctx.arc(p[0], p[1], rad, 0, Math.PI * 2);
+    });
+    ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+
+  // Collares de sondaje
+  ctx.font = '600 9.5px "IBM Plex Mono", monospace';
+  ctx.textAlign = 'left';
+  HOLE_META.forEach(hm => {
+    const p = project(key, hm.x, key === 'plan' ? hm.y : hm.collarZ);
+    ctx.fillStyle = pal.cu2;
+    ctx.beginPath();
+    ctx.moveTo(p[0], p[1] - 5);
+    ctx.lineTo(p[0] - 4.5, p[1] + 3);
+    ctx.lineTo(p[0] + 4.5, p[1] + 3);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = pal.text2;
+    ctx.fillText(hm.id.replace('EVR-', ''), p[0] + 7, p[1] + 3);
+  });
+
+  // Flecha Norte en Planta
+  if (key === 'plan') {
+    const nx = w - 24, ny = 24;
+    ctx.strokeStyle = pal.cu2;
+    ctx.lineWidth = 1.8;
+    ctx.beginPath();
+    ctx.moveTo(nx, ny + 9); ctx.lineTo(nx, ny - 9);
+    ctx.moveTo(nx - 4, ny - 3); ctx.lineTo(nx, ny - 9); ctx.lineTo(nx + 4, ny - 3);
+    ctx.stroke();
+    ctx.fillStyle = pal.cu2;
+    ctx.textAlign = 'center';
+    ctx.fillText('N', nx, ny + 21);
+  }
+
+  // Hover sincronizado
+  if (DEMO.hoverId) {
+    const hr = ALL_ROWS.find(r => r.sample === DEMO.hoverId);
+    if (hr) {
+      const p = project(key, hr.x, key === 'plan' ? hr.y : hr.z);
+      ctx.strokeStyle = pal.cu2;
+      ctx.lineWidth = 1;
+      ctx.globalAlpha = 0.6;
+      ctx.setLineDash([3, 3]);
+      ctx.beginPath(); ctx.moveTo(p[0], 0); ctx.lineTo(p[0], h); ctx.moveTo(0, p[1]); ctx.lineTo(w, p[1]); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.globalAlpha = 1;
+      ctx.lineWidth = 2.2;
+      ctx.beginPath(); ctx.arc(p[0], p[1], 7, 0, Math.PI * 2); ctx.stroke();
+    }
+  }
+}
+
+function setHoverSample(sampleId) {
+  if (DEMO.hoverId === sampleId) return;
+  DEMO.hoverId = sampleId;
+  $$('#demoTblBody tr.hov').forEach(tr => tr.classList.remove('hov'));
+  if (sampleId) {
+    const tr = $(`#demoTblBody tr[data-sample="${sampleId}"]`);
+    if (tr) tr.classList.add('hov');
+  }
+  requestDraw();
+}
+
+function bindCanvasHover(key) {
+  const V = CANV[key];
+  V.el.addEventListener('pointermove', e => {
+    const rect = V.el.getBoundingClientRect();
+    const px = e.clientX - rect.left, py = e.clientY - rect.top;
+    let best = null, bd = 144;
+    DEMO.filtered.forEach(r => {
+      const p = project(key, r.x, key === 'plan' ? r.y : r.z);
+      const d = (p[0] - px) * (p[0] - px) + (p[1] - py) * (p[1] - py);
+      if (d < bd) { bd = d; best = r; }
+    });
+    if (best) {
+      setHoverSample(best.sample);
+      const c = CLS[best.cls];
+      V.tip.innerHTML = `<b>${best.sample}</b> · ${best.bhid.replace('EVR-', '')}<br>${best.from}–${best.to} m · ${LITHO[best.litho].name}<br><span style="color:${c.color};font-weight:700">${best.cls}</span> · Cu <b>${NF0.format(best.cu)}</b> ppm · Mo ${NF1.format(best.mo)}`;
+      V.tip.classList.add('show');
+      V.tip.style.left = clamp(px + 12, 6, V.w - 220) + 'px';
+      V.tip.style.top = clamp(py - 64, 6, V.h - 76) + 'px';
+    } else {
+      setHoverSample(null);
+      V.tip.classList.remove('show');
+    }
+  });
+  V.el.addEventListener('pointerleave', () => {
+    setHoverSample(null);
+    V.tip.classList.remove('show');
+  });
+}
+
+/* ================================================================
+   ANIMACIÓN SEMIANIMADA DEL HERO Y DEMO
+================================================================ */
+function initHeroBars() {
+  const heights = [38, 62, 78, 95, 84, 71, 55, 88, 92, 64, 49, 76];
+  const row = $('#heroBars');
+  row.innerHTML = heights.map(h => `<i style="height:${h}%"></i>`).join('');
+  if (RM) return;
+  let step = 0;
+  setInterval(() => {
+    step++;
+    const bars = $$('#heroBars i');
+    bars.forEach((b, idx) => {
+      const base = heights[idx];
+      const delta = Math.sin((step * 0.45) + idx * 0.7) * 14;
+      b.style.height = clamp(Math.round(base + delta), 20, 100) + '%';
+      b.style.opacity = idx === (step % bars.length) ? '1' : '0.78';
+    });
+  }, 1100);
+}
+
+let autoTimer = null;
+function updateAutoPlayBtn() {
+  const btn = $('#btnAutoPlay');
+  btn.setAttribute('aria-pressed', String(DEMO.autoPlay));
+  $('#playIc').innerHTML = DEMO.autoPlay ? '<use href="#i-pause"/>' : '<use href="#i-play"/>';
+  $('#playTxt').textContent = DEMO.autoPlay ? 'Simulación activa' : 'Reanudar simulación';
+}
+
+function pauseAutoPlay() {
+  if (!DEMO.autoPlay) return;
+  DEMO.autoPlay = false;
+  updateAutoPlayBtn();
+}
+
+const DEMO_SEQUENCE = [500, 340, 220, 140, 260, 420, 500];
+let seqIdx = 0;
+
+function startAutoLoop() {
+  if (autoTimer) clearInterval(autoTimer);
+  autoTimer = setInterval(() => {
+    if (!DEMO.autoPlay) return;
+    seqIdx = (seqIdx + 1) % DEMO_SEQUENCE.length;
+    DEMO.depth = DEMO_SEQUENCE[seqIdx];
+    $('#demoDepth').value = DEMO.depth;
+    $('#demoDepthVal').textContent = DEMO.depth + ' m';
+    updateDemoData();
+  }, 2400);
+}
+
+$('#btnAutoPlay').addEventListener('click', () => {
+  DEMO.autoPlay = !DEMO.autoPlay;
+  updateAutoPlayBtn();
+});
+
+$('#demoDepth').addEventListener('input', e => {
+  pauseAutoPlay();
+  DEMO.depth = Number(e.target.value);
+  $('#demoDepthVal').textContent = DEMO.depth + ' m';
+  updateDemoData();
+});
+
+/* ================================================================
+   REVEAL AL SCROLL & NAVEGACIÓN ACTIVA
+================================================================ */
+function initObservers() {
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('in'); });
+  }, { threshold: 0.08 });
+  $$('.reveal').forEach(el => revObs.observe(el));
+
+  const sections = ['inicio', 'nosotros', 'lineas-de-negocio', 'demo-interactiva', 'casos', 'regulaciones', 'contacto']
+    .map(id => document.getElementById(id)).filter(Boolean);
+  const navLinks = $$('#mainNav a');
+  const navObs = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        navLinks.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + en.target.id));
+      }
+    });
+  }, { rootMargin: '-35% 0px -55% 0px' });
+  sections.forEach(s => navObs.observe(s));
+}
+
+/* ================================================================
+   ARRANQUE INICIAL
+================================================================ */
+applySiteConfig();
+renderLines();
+buildDemoChips();
+initHeroBars();
+sizeCanvases();
+bindCanvasHover('sec');
+bindCanvasHover('plan');
+updateDemoData();
+updateAutoPlayBtn();
+startAutoLoop();
+initObservers();
+
+window.addEventListener('resize', () => {
+  sizeCanvases();
+  requestDraw();
+});
+})();
+</script>
+</body>
+</html>
