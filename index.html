@@ -275,14 +275,16 @@ section.tight{padding:36px 0}
 .contact-rep{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);margin-bottom:0}
 .contact-rep strong{display:block;font-size:15px;color:#ffffff}
 .contact-rep span{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#bfdbfe}
-.contact-cards-wrap{padding:28px;display:flex;align-items:center}
-.contact-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%}
-.c-card{background:var(--surface2);border:1px solid var(--line2);border-radius:13px;padding:17px;display:flex;flex-direction:column;gap:8px;transition:.18s}
+.contact-cards-wrap{padding:26px;display:flex;align-items:center}
+.contact-cards{display:grid;grid-template-columns:1fr;gap:12px;width:100%}
+.c-card{background:var(--surface2);border:1px solid var(--line2);border-radius:13px;padding:15px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;transition:.18s}
 .c-card:hover{border-color:var(--cu);transform:translateY(-2px)}
-.c-card .c-lbl{font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--cu2);font-weight:700}
-.c-card .c-val{font-size:14.5px;font-weight:800;color:var(--text);word-break:break-word}
+.c-card-main{display:flex;align-items:center;gap:13px;min-width:0}
+.c-ico{width:40px;height:40px;border-radius:11px;background:var(--cu-soft);border:1px solid color-mix(in srgb,var(--cu) 28%,transparent);color:var(--cu2);display:flex;align-items:center;justify-content:center;flex:none}
+.c-card .c-lbl{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--cu2);font-weight:700}
+.c-card .c-val{font-size:15.5px;font-weight:800;color:var(--text);white-space:nowrap}
 .c-card .c-sub{font-size:12px;color:var(--text3)}
-.c-card .c-btns{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.c-card .c-btns{display:flex;gap:7px;flex-wrap:wrap;flex:none}
 
 /* ============ FOOTER ============ */
 footer{border-top:1px solid var(--line);background:var(--surface);margin-top:24px;padding:34px 0 28px}
@@ -347,6 +349,8 @@ dialog[open]{animation:dlgIn .26s var(--ease)}
   .top-contact-btn{padding:8px 11px;font-size:12px}
   #btnTheme{width:36px;height:36px;padding:0}
   .contact-brand-side,.contact-cards-wrap{padding:22px 18px}
+  .c-card{flex-direction:column;align-items:flex-start}
+  .c-card .c-val{font-size:14.5px}
   .demo-slider{margin-left:0;width:100%;justify-content:space-between}
   .dv-canvas-wrap{height:260px}
 }
@@ -803,29 +807,46 @@ dialog[open]{animation:dlgIn .26s var(--ease)}
         <div class="contact-cards-wrap">
           <div class="contact-cards">
             <div class="c-card">
-              <span class="c-lbl">Teléfono / Celular</span>
-              <div class="c-val" data-cfg="phone">+51 997 050 382</div>
-              <div class="c-sub">Atención directa y WhatsApp</div>
+              <div class="c-card-main">
+                <div class="c-ico"><svg class="ic"><use href="#i-phone"/></svg></div>
+                <div>
+                  <span class="c-lbl">Teléfono / Celular</span>
+                  <div class="c-val" data-cfg="phone">+51 997 050 382</div>
+                  <div class="c-sub">Atención directa y WhatsApp</div>
+                </div>
+              </div>
               <div class="c-btns">
-                <a class="btn sm" data-cfg-href="phoneHref" href="tel:+51997050382">Llamar</a>
+                <a class="btn sm" id="btnCallPhone" data-cfg-href="phoneHref" href="tel:+51997050382">Llamar</a>
+                <a class="btn primary sm" data-cfg-href="whatsappHref" href="https://wa.me/51997050382" target="_blank" rel="noopener">WhatsApp</a>
               </div>
             </div>
 
             <div class="c-card">
-              <span class="c-lbl">Correo Electrónico</span>
-              <div class="c-val" data-cfg="email">pdangel98@gmail.com</div>
-              <div class="c-sub">Consultas comerciales y demos</div>
+              <div class="c-card-main">
+                <div class="c-ico"><svg class="ic"><use href="#i-mail"/></svg></div>
+                <div>
+                  <span class="c-lbl">Correo Electrónico</span>
+                  <div class="c-val" data-cfg="email">pdangel98@gmail.com</div>
+                  <div class="c-sub">Consultas comerciales y demos</div>
+                </div>
+              </div>
               <div class="c-btns">
+                <a class="btn sm" data-cfg-href="emailHref" href="mailto:pdangel98@gmail.com">Escribir</a>
                 <button class="btn sm" id="btnCopyEmail" type="button"><svg class="ic" style="width:14px;height:14px"><use href="#i-copy"/></svg>Copiar</button>
               </div>
             </div>
 
             <div class="c-card">
-              <span class="c-lbl">Dirección</span>
-              <div class="c-val" data-cfg="city">La Molina - Lima - Perú</div>
-              <div class="c-sub" data-cfg="domain">DMDStack.com</div>
+              <div class="c-card-main">
+                <div class="c-ico"><svg class="ic"><use href="#i-pin"/></svg></div>
+                <div>
+                  <span class="c-lbl">Dirección</span>
+                  <div class="c-val" data-cfg="city">La Molina - Lima - Perú</div>
+                  <div class="c-sub" data-cfg="domain">DMDStack.com</div>
+                </div>
+              </div>
               <div class="c-btns">
-                <span class="mono" style="font-size:11px;color:var(--ok)">● Atención nacional</span>
+                <span class="mono" style="font-size:11px;color:var(--ok);font-weight:600">● Atención nacional</span>
               </div>
             </div>
           </div>
@@ -998,6 +1019,13 @@ $('#btnCopyEmail').addEventListener('click', async () => {
   } catch (e) {
     toast('Correo: ' + SITE_CONFIG.email);
   }
+});
+
+$('#btnCallPhone').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(SITE_CONFIG.phone);
+    toast('Teléfono copiado: ' + SITE_CONFIG.phone);
+  } catch (e) {}
 });
 
 /* ================================================================
