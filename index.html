@@ -1,48 +1,48 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="dark">
+<html lang="es" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Geoandina Tech &amp; Analytics | Business Intelligence, Data Logging e IA para Minería en Perú</title>
-<meta name="description" content="Consultoría tecnológica en Business Intelligence, Data Logging geológico, analítica minera con Inteligencia Artificial y desarrollo de software a medida en Perú. Cumplimiento Ley N.° 29733.">
+<title>DMDStack | Desarrollo de Software, Business Intelligence e IA en Perú</title>
+<meta name="description" content="DMDStack (DMDStack.com) — Desarrollamos software que convierte ideas en soluciones reales. Business Intelligence, Data Logging, analítica minera e Inteligencia Artificial en Perú. Cumplimiento Ley N.° 29733.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ============ SISTEMA DE COLOR MINERAL · COBRE / ORO / MOLIBDENO ============ */
-:root{
-  --bg:#0f0c09; --bg2:#151009; --surface:#1c1611; --surface2:#251d15; --overlay:#2b221a;
-  --line:#3b2f24; --line2:#54422f;
-  --text:#f0e8dc; --text2:#bfae97; --text3:#8f7d66;
-  --cu:#e0762f; --cu2:#f2953f; --cu-deep:#8a4a1c; --cu-soft:rgba(224,118,47,.14);
-  --mo:#4da3ff; --au:#e8c04a; --bornite:#c95bd8; --malachite:#3ecf8e;
-  --ok:#3ecf8e; --warn:#f0b429; --bad:#f0506e; --info:#4da3ff;
-  --scrim:rgba(8,5,3,.72);
-  --grad-brand:linear-gradient(100deg,#e0762f 0%,#e8c04a 52%,#4da3ff 110%);
-  --grad-btn:linear-gradient(120deg,#e0762f,#f2a13f);
-  --shadow:0 12px 34px rgba(0,0,0,.45);
+/* ============ SISTEMA DE COLOR DMDSTACK · BLANCO & AZUL COBALTO MODERNO ============ */
+:root,[data-theme="light"]{
+  --bg:#f4f7fc; --bg2:#eaf0fa; --surface:#ffffff; --surface2:#f1f5fb; --overlay:#ffffff;
+  --line:#dbe4f2; --line2:#c1d1ea;
+  --text:#0f172a; --text2:#475569; --text3:#64748b;
+  --cu:#1d3f96; --cu2:#2563eb; --cu-deep:#142c6b; --cu-soft:rgba(29,63,150,.09);
+  --mo:#0284c7; --au:#d97706; --bornite:#7c3aed; --malachite:#059669;
+  --ok:#059669; --warn:#d97706; --bad:#e11d48; --info:#2563eb;
+  --scrim:rgba(15,23,42,.52);
+  --grad-brand:linear-gradient(110deg,#142c6b 0%,#1d3f96 50%,#0ea5e9 110%);
+  --grad-btn:linear-gradient(120deg,#1d3f96,#2563eb);
+  --shadow:0 12px 32px rgba(24,52,114,.08);
   --ease:cubic-bezier(.22,.9,.28,1);
-  --contour-op:.055; --aurora-op:.30; --grain-op:.045;
+  --contour-op:.06; --aurora-op:.16; --grain-op:.02;
   --topbar-h:68px;
 }
-[data-theme="light"]{
-  --bg:#f2ece2; --bg2:#eae2d4; --surface:#fbf7f0; --surface2:#f0e8da; --overlay:#fffdf8;
-  --line:#d9ccb8; --line2:#c2b096;
-  --text:#251b10; --text2:#5d4d3a; --text3:#8a7860;
-  --cu:#b4551a; --cu2:#cf6a24; --cu-deep:#9c5a24; --cu-soft:rgba(180,85,26,.12);
-  --mo:#1f6fd6; --au:#a97e12; --bornite:#a136b0; --malachite:#1f9d6b;
-  --ok:#1f9d6b; --warn:#a97a10; --bad:#d3304f; --info:#1f6fd6;
-  --scrim:rgba(40,28,16,.48);
-  --grad-brand:linear-gradient(100deg,#b4551a 0%,#a97e12 52%,#1f6fd6 110%);
-  --grad-btn:linear-gradient(120deg,#c25e1e,#e08a2e);
-  --shadow:0 10px 28px rgba(90,60,25,.14);
-  --contour-op:.085; --aurora-op:.20; --grain-op:.035;
+[data-theme="dark"]{
+  --bg:#091122; --bg2:#0e172c; --surface:#121e38; --surface2:#192849; --overlay:#1d2e54;
+  --line:#253961; --line2:#334d80;
+  --text:#f1f5f9; --text2:#cbd5e1; --text3:#94a3b8;
+  --cu:#3b82f6; --cu2:#60a5fa; --cu-deep:#1d3f96; --cu-soft:rgba(59,130,246,.15);
+  --mo:#38bdf8; --au:#fbbf24; --bornite:#a78bfa; --malachite:#34d399;
+  --ok:#34d399; --warn:#fbbf24; --bad:#fb7185; --info:#60a5fa;
+  --scrim:rgba(5,10,22,.72);
+  --grad-brand:linear-gradient(110deg,#60a5fa 0%,#3b82f6 52%,#38bdf8 110%);
+  --grad-btn:linear-gradient(120deg,#2563eb,#3b82f6);
+  --shadow:0 14px 36px rgba(0,0,0,.45);
+  --contour-op:.05; --aurora-op:.28; --grain-op:.035;
 }
 *{box-sizing:border-box;margin:0;padding:0;scrollbar-width:thin;scrollbar-color:var(--cu-deep) var(--surface2)}
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-track{background:var(--surface2)}
 ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--cu),var(--cu-deep));border-radius:8px;border:2px solid var(--surface2)}
-::selection{background:var(--cu);color:#160c04}
+::selection{background:var(--cu);color:#ffffff}
 html{scroll-behavior:smooth;overflow-x:clip}
 body{
   font-family:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
@@ -53,7 +53,7 @@ body{
 button{font-family:inherit;color:inherit}
 a{color:var(--cu2);text-decoration:none}
 :focus-visible{outline:2px solid var(--cu2);outline-offset:2px;border-radius:6px}
-.skip{position:fixed;left:12px;top:-60px;z-index:200;background:var(--cu);color:#160c04;padding:10px 16px;border-radius:10px;font-weight:700;transition:top .25s}
+.skip{position:fixed;left:12px;top:-60px;z-index:200;background:var(--cu);color:#ffffff;padding:10px 16px;border-radius:10px;font-weight:700;transition:top .25s}
 .skip:focus{top:12px}
 svg.ic{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
 
@@ -62,14 +62,14 @@ svg.ic{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;strok
   radial-gradient(1200px 640px at 85% -8%,var(--cu-soft),transparent 62%),
   linear-gradient(180deg,var(--bg2),var(--bg) 42%)}
 .bg .aur{position:absolute;border-radius:50%;filter:blur(75px);opacity:var(--aurora-op);will-change:transform}
-.bg .a1{width:50vw;height:50vw;left:-14vw;top:-16vw;background:radial-gradient(circle,#e0762f,transparent 65%);animation:drift1 32s var(--ease) infinite alternate}
-.bg .a2{width:42vw;height:42vw;right:-10vw;top:12vh;background:radial-gradient(circle,#e8c04a,transparent 65%);animation:drift2 40s var(--ease) infinite alternate}
-.bg .a3{width:46vw;height:46vw;left:22vw;bottom:-22vw;background:radial-gradient(circle,#4da3ff,transparent 65%);animation:drift3 46s var(--ease) infinite alternate}
+.bg .a1{width:50vw;height:50vw;left:-14vw;top:-16vw;background:radial-gradient(circle,#2563eb,transparent 65%);animation:drift1 32s var(--ease) infinite alternate}
+.bg .a2{width:42vw;height:42vw;right:-10vw;top:12vh;background:radial-gradient(circle,#0ea5e9,transparent 65%);animation:drift2 40s var(--ease) infinite alternate}
+.bg .a3{width:46vw;height:46vw;left:22vw;bottom:-22vw;background:radial-gradient(circle,#1d3f96,transparent 65%);animation:drift3 46s var(--ease) infinite alternate}
 @keyframes drift1{to{transform:translate(8vw,6vh) scale(1.12)}}
 @keyframes drift2{to{transform:translate(-7vw,9vh) scale(.92)}}
 @keyframes drift3{to{transform:translate(5vw,-8vh) scale(1.1)}}
 .bg .contour{position:absolute;inset:0;opacity:var(--contour-op);
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%23e0762f' stroke-width='1.1'%3E%3Cpath d='M0 60 C90 20 180 100 270 60 S420 90 420 60'/%3E%3Cpath d='M0 130 C100 90 200 170 300 130 S420 160 420 130'/%3E%3Cpath d='M0 205 C80 165 190 245 290 205 S420 235 420 205'/%3E%3Cpath d='M0 280 C110 240 210 320 310 280 S420 310 420 280'/%3E%3Cpath d='M0 355 C90 315 190 395 290 355 S420 385 420 355'/%3E%3Ccircle cx='330' cy='90' r='26'/%3E%3Ccircle cx='330' cy='90' r='44'/%3E%3Ccircle cx='90' cy='330' r='22'/%3E%3Ccircle cx='90' cy='330' r='40'/%3E%3C/g%3E%3C/svg%3E")}
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%231d3f96' stroke-width='1.1'%3E%3Cpath d='M0 60 C90 20 180 100 270 60 S420 90 420 60'/%3E%3Cpath d='M0 130 C100 90 200 170 300 130 S420 160 420 130'/%3E%3Cpath d='M0 205 C80 165 190 245 290 205 S420 235 420 205'/%3E%3Cpath d='M0 280 C110 240 210 320 310 280 S420 310 420 280'/%3E%3Cpath d='M0 355 C90 315 190 395 290 355 S420 385 420 355'/%3E%3Ccircle cx='330' cy='90' r='26'/%3E%3Ccircle cx='330' cy='90' r='44'/%3E%3Ccircle cx='90' cy='330' r='22'/%3E%3Ccircle cx='90' cy='330' r='40'/%3E%3C/g%3E%3C/svg%3E")}
 .bg .grain{position:absolute;inset:0;opacity:var(--grain-op);mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
 
@@ -79,7 +79,7 @@ svg.ic{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;strok
 .topbar-in{max-width:1320px;margin:auto;display:flex;align-items:center;gap:14px;padding:11px 22px}
 .brand{display:flex;align-items:center;gap:11px;color:inherit;flex:none;min-width:0}
 .brand > div{min-width:0}
-.brand .crys{width:38px;height:38px;flex:none;filter:drop-shadow(0 0 9px rgba(224,118,47,.48))}
+.brand .crys{width:38px;height:38px;flex:none;filter:drop-shadow(0 4px 10px rgba(29,63,150,.28))}
 .brand h1,.brand .brand-title{font-size:17px;font-weight:800;letter-spacing:-.02em;line-height:1.15;margin:0}
 .brand .brand-title em{font-style:normal;background:var(--grad-brand);-webkit-background-clip:text;background-clip:text;color:transparent}
 .brand small{display:block;font-size:10px;color:var(--text3);letter-spacing:.08em;font-weight:600}
@@ -92,10 +92,10 @@ svg.ic{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;strok
 .top-actions{display:flex;gap:8px;margin-left:auto;align-items:center;flex:none}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:13px;font-weight:700;padding:9px 15px;border-radius:10px;
   border:1px solid var(--line2);background:var(--surface);color:var(--text);cursor:pointer;transition:.18s var(--ease);white-space:nowrap}
-.btn:hover{border-color:var(--cu);color:var(--cu2);transform:translateY(-1px);box-shadow:0 6px 18px rgba(224,118,47,.18)}
+.btn:hover{border-color:var(--cu);color:var(--cu2);transform:translateY(-1px);box-shadow:0 6px 18px rgba(29,63,150,.18)}
 .btn:active{transform:translateY(0)}
-.btn.primary{background:var(--grad-btn);color:#1c0e04;border-color:transparent;box-shadow:0 5px 18px rgba(224,118,47,.34)}
-.btn.primary:hover{color:#1c0e04;filter:brightness(1.07)}
+.btn.primary{background:var(--grad-btn);color:#ffffff;border-color:transparent;box-shadow:0 6px 18px rgba(29,63,150,.28)}
+.btn.primary:hover{color:#ffffff;filter:brightness(1.08)}
 .btn.icon{padding:9px}
 .btn.sm{padding:6px 11px;font-size:12px;border-radius:8px}
 .menu-toggle{display:none}
@@ -163,13 +163,13 @@ section.tight{padding:36px 0}
 /* ============ LÍNEAS DE NEGOCIO (TOUCH CONSULTING) ============ */
 .lines-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .line-card{padding:22px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;cursor:pointer;transition:.22s var(--ease)}
-.line-card:hover{transform:translateY(-4px);border-color:var(--cu);box-shadow:0 16px 36px rgba(0,0,0,.35)}
-.line-card.featured{border-color:color-mix(in srgb,var(--cu) 52%,var(--line));background:linear-gradient(160deg,color-mix(in srgb,var(--cu) 8%,var(--surface)),var(--surface))}
+.line-card:hover{transform:translateY(-4px);border-color:var(--cu);box-shadow:0 16px 36px rgba(24,52,114,.14)}
+.line-card.featured{border-color:color-mix(in srgb,var(--cu) 48%,var(--line));background:linear-gradient(160deg,color-mix(in srgb,var(--cu) 6%,var(--surface)),var(--surface))}
 .line-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-.line-ico{width:46px;height:46px;border-radius:12px;background:var(--cu-soft);border:1px solid color-mix(in srgb,var(--cu) 38%,transparent);display:flex;align-items:center;justify-content:center;color:var(--cu2)}
+.line-ico{width:46px;height:46px;border-radius:12px;background:var(--cu-soft);border:1px solid color-mix(in srgb,var(--cu) 32%,transparent);display:flex;align-items:center;justify-content:center;color:var(--cu2)}
 .line-ico svg{width:23px;height:23px}
 .line-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;padding:4px 8px;border-radius:7px;background:var(--surface2);border:1px solid var(--line2);color:var(--text2)}
-.line-card.featured .line-tag{background:var(--cu);color:#160c04;border-color:transparent}
+.line-card.featured .line-tag{background:var(--cu);color:#ffffff;border-color:transparent}
 .line-card h3{font-size:17.5px;font-weight:800;letter-spacing:-.015em;line-height:1.25}
 .line-card p{font-size:13.5px;color:var(--text2);flex:1}
 .line-more{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--cu2);margin-top:4px;background:none;border:none;padding:0;cursor:pointer;text-align:left}
@@ -265,11 +265,22 @@ section.tight{padding:36px 0}
 .faq-item[open] summary svg{transform:rotate(180deg)}
 .faq-ans{padding:0 20px 18px;font-size:14px;color:var(--text2);line-height:1.65;border-top:1px solid var(--line);padding-top:14px}
 
-/* ============ CONTACTO DIRECTO (SIN FORMULARIOS) ============ */
-.contact-box{padding:30px;display:grid;grid-template-columns:1fr 1.15fr;gap:26px;align-items:center}
-.contact-box h2{font-size:clamp(24px,3vw,34px);font-weight:800;line-height:1.18;margin-bottom:10px}
-.contact-box p{font-size:15px;color:var(--text2);margin-bottom:16px}
-.contact-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+/* ============ CONTACTO DIRECTO (TARJETA MODERNA AZUL + BLANCO) ============ */
+.contact-box{padding:0;overflow:hidden;display:grid;grid-template-columns:1fr 1.15fr;gap:0;align-items:stretch}
+.contact-brand-side{padding:32px;background:linear-gradient(135deg,#142c6b 0%,#1d3f96 58%,#2563eb 100%);color:#ffffff;display:flex;flex-direction:column;justify-content:center}
+.contact-brand-side .kicker{color:#bfdbfe}
+.contact-brand-side .kicker::before{background:#93c5fd}
+.contact-brand-side h2{font-size:clamp(24px,3vw,32px);font-weight:800;line-height:1.18;margin-bottom:10px;color:#ffffff}
+.contact-brand-side p{font-size:14.5px;color:#dbeafe;margin-bottom:16px}
+.contact-rep{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);margin-bottom:18px}
+.contact-rep strong{display:block;font-size:15px;color:#ffffff}
+.contact-rep span{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#bfdbfe}
+.contact-brand-side .btn{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.35);color:#ffffff}
+.contact-brand-side .btn:hover{background:rgba(255,255,255,.24);color:#ffffff;border-color:#ffffff}
+.contact-brand-side .btn.primary{background:#ffffff;color:#142c6b;border-color:transparent;box-shadow:0 8px 22px rgba(10,20,55,.28)}
+.contact-brand-side .btn.primary:hover{background:#eff6ff;color:#142c6b}
+.contact-cards-wrap{padding:28px;display:flex;align-items:center}
+.contact-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%}
 .c-card{background:var(--surface2);border:1px solid var(--line2);border-radius:13px;padding:17px;display:flex;flex-direction:column;gap:8px;transition:.18s}
 .c-card:hover{border-color:var(--cu);transform:translateY(-2px)}
 .c-card .c-lbl{font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--cu2);font-weight:700}
@@ -339,6 +350,7 @@ dialog[open]{animation:dlgIn .26s var(--ease)}
   .top-portal-btn{display:none}
   .top-contact-btn{padding:8px 11px;font-size:12px}
   #btnTheme{width:36px;height:36px;padding:0}
+  .contact-brand-side,.contact-cards-wrap{padding:22px 18px}
   .demo-slider{margin-left:0;width:100%;justify-content:space-between}
   .dv-canvas-wrap{height:260px}
 }
@@ -387,18 +399,19 @@ dialog[open]{animation:dlgIn .26s var(--ease)}
 <!-- ================= HEADER ================= -->
 <header class="topbar" id="top">
   <div class="topbar-in">
-    <a class="brand" href="#inicio" aria-label="Inicio Geoandina Tech & Analytics">
+    <a class="brand" href="#inicio" aria-label="Inicio DMDStack">
       <svg class="crys" viewBox="0 0 40 40" aria-hidden="true">
-        <defs><linearGradient id="gcu" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#f2a13f"/><stop offset=".55" stop-color="#e0762f"/><stop offset="1" stop-color="#4da3ff"/>
+        <defs><linearGradient id="gdmd" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#142c6b"/><stop offset=".6" stop-color="#1d3f96"/><stop offset="1" stop-color="#2563eb"/>
         </linearGradient></defs>
-        <path d="M20 3 33 12v16L20 37 7 28V12L20 3Z" fill="none" stroke="url(#gcu)" stroke-width="2.4" stroke-linejoin="round"/>
-        <path d="M20 3v34M7 12l13 8 13-8M7 28l13-8 13 8" fill="none" stroke="url(#gcu)" stroke-width="1.3" opacity=".75"/>
-        <circle cx="20" cy="20" r="3.2" fill="url(#gcu)"/>
+        <rect x="0" y="0" width="40" height="40" rx="10" fill="url(#gdmd)"/>
+        <path d="M20 7.5 30 13 20 18.5 10 13 20 7.5Z" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M10 19.5 20 25 30 19.5" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10 26 20 31.5 30 26" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       <div>
-        <div class="brand-title"><span data-cfg="brandShort">Geoandina</span> · <em>Analytics &amp; IA</em></div>
-        <small class="mono" data-cfg="brandSub">SOLUCIONES TECNOLÓGICAS PARA MINERÍA · PERÚ</small>
+        <div class="brand-title"><span data-cfg="brandShort">DMDStack</span> · <em>Software &amp; IA</em></div>
+        <small class="mono" data-cfg="brandSub">DESARROLLAMOS SOFTWARE PARA HACER CRECER TU NEGOCIO</small>
       </div>
     </a>
 
@@ -415,7 +428,7 @@ dialog[open]{animation:dlgIn .26s var(--ease)}
 
     <div class="top-actions">
       <button class="btn icon" id="btnTheme" title="Cambiar tema claro/oscuro" aria-label="Cambiar tema">
-        <svg class="ic" id="themeIc"><use href="#i-sun"/></svg>
+        <svg class="ic" id="themeIc"><use href="#i-moon"/></svg>
       </button>
       <a class="btn sm top-portal-btn" href="portal-geometalurgico.html" title="Abrir Portal Geometalúrgico completo">
         <svg class="ic"><use href="#i-ext"/></svg><span class="bt-hide-sm">Portal Demo</span>
@@ -434,10 +447,10 @@ dialog[open]{animation:dlgIn .26s var(--ease)}
     <div class="wrap">
       <div class="hero-grid">
         <div>
-          <div class="hero-pill"><span class="pulse"></span>BI · Data Logging · Inteligencia Artificial para Minería</div>
-          <h1>Transformamos datos complejos de minería y operaciones en <em>decisiones ejecutivas</em> con IA</h1>
+          <div class="hero-pill"><span class="pulse"></span>DMDStack.com · Software · BI · Inteligencia Artificial</div>
+          <h1>Desarrollamos software y <em>analítica con IA</em> que convierten datos complejos en soluciones reales</h1>
           <p class="lead">
-            A través de <strong data-cfg="parentCompany">Geoandina</strong>, conectamos tu software de <em>data logging</em>, reportes geológicos y sistemas operativos para convertir exportaciones difíciles de analizar en dashboards interactivos, alertas inteligentes y trazabilidad alineada con la normativa peruana.
+            En <strong data-cfg="brandFull">DMDStack</strong> desarrollamos software para hacer crecer tu negocio: conectamos aplicaciones de <em>data logging</em>, reportes mineros y sistemas operativos para generar dashboards interactivos, automatización e insights con IA alineados con la normativa peruana.
           </p>
           <div class="hero-ctas">
             <a class="btn primary" href="#demo-interactiva">
@@ -448,9 +461,9 @@ dialog[open]{animation:dlgIn .26s var(--ease)}
             </a>
           </div>
           <div class="hero-meta">
-            <span><svg class="ic"><use href="#i-pin"/></svg><b data-cfg="city">La Molina, Lima – Perú</b></span>
-            <span><svg class="ic"><use href="#i-phone"/></svg><a data-cfg-href="phoneHref" href="tel:+51999000000" data-cfg="phone">+51 999 000 000</a></span>
-            <span><svg class="ic"><use href="#i-mail"/></svg><a data-cfg-href="emailHref" href="mailto:contacto@geoandina.pe" data-cfg="email">contacto@geoandina.pe</a></span>
+            <span><svg class="ic"><use href="#i-pin"/></svg><b data-cfg="city">La Molina - Lima - Perú</b></span>
+            <span><svg class="ic"><use href="#i-phone"/></svg><a data-cfg-href="phoneHref" href="tel:+51997050382" data-cfg="phone">+51 997 050 382</a></span>
+            <span><svg class="ic"><use href="#i-mail"/></svg><a data-cfg-href="emailHref" href="mailto:pdangel98@gmail.com" data-cfg="email">pdangel98@gmail.com</a></span>
           </div>
         </div>
 
@@ -501,8 +514,8 @@ dialog[open]{animation:dlgIn .26s var(--ease)}
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="kicker">01 · Nuestros Pilares</span>
-        <h2>Soluciones tecnológicas modernas con conocimiento real de la operación minera</h2>
-        <p class="sub">Nacemos de la experiencia logística y operativa junto a Geoandina para llevar Business Intelligence, software e Inteligencia Artificial práctica a minería, industria y empresas corporativas en el Perú.</p>
+        <h2>Soluciones tecnológicas modernas con conocimiento real de la operación minera y empresarial</h2>
+        <p class="sub">En <strong>DMDStack</strong> combinamos ingeniería de software a medida, Business Intelligence e Inteligencia Artificial práctica para potenciar empresas mineras, logísticas y corporativas en el Perú.</p>
       </div>
       <div class="pillars-grid">
         <article class="card pillar reveal" style="--i:0">
@@ -778,45 +791,54 @@ dialog[open]{animation:dlgIn .26s var(--ease)}
   <section id="contacto">
     <div class="wrap">
       <div class="card contact-box reveal">
-        <div>
-          <span class="kicker">07 · Contacto Directo</span>
-          <h2>Cuéntanos tu desafío operativo o tecnológico</h2>
-          <p>Comunicación directa y sin intermediarios. Atendemos proyectos en minería, logística y empresas corporativas en todo el Perú desde nuestra sede en <strong>La Molina, Lima</strong>.</p>
+        <div class="contact-brand-side">
+          <span class="kicker">07 · Contacto Directo · <span data-cfg="domain">DMDStack.com</span></span>
+          <h2>Desarrollamos software para hacer crecer tu negocio</h2>
+          <p>Comunicación directa y sin formularios. Convierte tus ideas y datos operativos en soluciones reales con nuestro equipo en <strong data-cfg="city">La Molina - Lima - Perú</strong>.</p>
+          <div class="contact-rep">
+            <svg class="ic" style="width:28px;height:28px;color:#ffffff"><use href="#i-layers"/></svg>
+            <div>
+              <strong data-cfg="contactName">David Mamani</strong>
+              <span data-cfg="contactRole">Gerente General · DMDStack</span>
+            </div>
+          </div>
           <div class="hero-ctas" style="margin-bottom:0">
-            <a class="btn primary" data-cfg-href="whatsappHref" href="https://wa.me/51999000000" target="_blank" rel="noopener">
+            <a class="btn primary" data-cfg-href="whatsappHref" href="https://wa.me/51997050382" target="_blank" rel="noopener">
               <svg class="ic"><use href="#i-phone"/></svg>Escribir por WhatsApp
             </a>
-            <a class="btn" data-cfg-href="emailHref" href="mailto:contacto@geoandina.pe">
+            <a class="btn" data-cfg-href="emailHref" href="mailto:pdangel98@gmail.com">
               <svg class="ic"><use href="#i-mail"/></svg>Enviar Correo
             </a>
           </div>
         </div>
 
-        <div class="contact-cards">
-          <div class="c-card">
-            <span class="c-lbl">Teléfono / Celular</span>
-            <div class="c-val" data-cfg="phone">+51 999 000 000</div>
-            <div class="c-sub">Atención directa y WhatsApp corporativo</div>
-            <div class="c-btns">
-              <a class="btn sm" data-cfg-href="phoneHref" href="tel:+51999000000">Llamar</a>
+        <div class="contact-cards-wrap">
+          <div class="contact-cards">
+            <div class="c-card">
+              <span class="c-lbl">Teléfono / Celular</span>
+              <div class="c-val" data-cfg="phone">+51 997 050 382</div>
+              <div class="c-sub">Atención directa y WhatsApp</div>
+              <div class="c-btns">
+                <a class="btn sm" data-cfg-href="phoneHref" href="tel:+51997050382">Llamar</a>
+              </div>
             </div>
-          </div>
 
-          <div class="c-card">
-            <span class="c-lbl">Correo Electrónico</span>
-            <div class="c-val" data-cfg="email">contacto@geoandina.pe</div>
-            <div class="c-sub">Consultas comerciales y demos</div>
-            <div class="c-btns">
-              <button class="btn sm" id="btnCopyEmail" type="button"><svg class="ic" style="width:14px;height:14px"><use href="#i-copy"/></svg>Copiar</button>
+            <div class="c-card">
+              <span class="c-lbl">Correo Electrónico</span>
+              <div class="c-val" data-cfg="email">pdangel98@gmail.com</div>
+              <div class="c-sub">Consultas comerciales y demos</div>
+              <div class="c-btns">
+                <button class="btn sm" id="btnCopyEmail" type="button"><svg class="ic" style="width:14px;height:14px"><use href="#i-copy"/></svg>Copiar</button>
+              </div>
             </div>
-          </div>
 
-          <div class="c-card">
-            <span class="c-lbl">Oficina Lima</span>
-            <div class="c-val" data-cfg="city">La Molina, Lima – Perú</div>
-            <div class="c-sub" data-cfg="address">Av. La Molina, La Molina 15024, Lima</div>
-            <div class="c-btns">
-              <span class="mono" style="font-size:11px;color:var(--ok)">● Atención nacional</span>
+            <div class="c-card">
+              <span class="c-lbl">Dirección</span>
+              <div class="c-val" data-cfg="city">La Molina - Lima - Perú</div>
+              <div class="c-sub" data-cfg="domain">DMDStack.com</div>
+              <div class="c-btns">
+                <span class="mono" style="font-size:11px;color:var(--ok)">● Atención nacional</span>
+              </div>
             </div>
           </div>
         </div>
@@ -832,16 +854,18 @@ dialog[open]{animation:dlgIn .26s var(--ease)}
       <div>
         <div class="brand" style="margin-bottom:12px">
           <svg class="crys" viewBox="0 0 40 40" aria-hidden="true">
-            <path d="M20 3 33 12v16L20 37 7 28V12L20 3Z" fill="none" stroke="var(--cu2)" stroke-width="2.4" stroke-linejoin="round"/>
-            <circle cx="20" cy="20" r="3.2" fill="var(--cu2)"/>
+            <rect x="0" y="0" width="40" height="40" rx="10" fill="#1d3f96"/>
+            <path d="M20 7.5 30 13 20 18.5 10 13 20 7.5Z" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M10 19.5 20 25 30 19.5" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 26 20 31.5 30 26" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <div>
-            <div class="brand-title"><span data-cfg="brandShort">Geoandina</span> · <em>Analytics &amp; IA</em></div>
-            <small class="mono">BI · DATA LOGGING · SOFTWARE A MEDIDA</small>
+            <div class="brand-title"><span data-cfg="brandShort">DMDStack</span> · <em>Software &amp; IA</em></div>
+            <small class="mono" data-cfg="domain">DMDStack.com</small>
           </div>
         </div>
         <p style="font-size:13.5px;color:var(--text2);max-width:380px">
-          Consultoría tecnológica, Business Intelligence e Inteligencia Artificial aplicada al sector minero y empresarial en Perú.
+          Desarrollamos software que convierte ideas en soluciones reales. Business Intelligence, Data Logging e Inteligencia Artificial en Perú.
         </p>
       </div>
 
@@ -859,13 +883,13 @@ dialog[open]{animation:dlgIn .26s var(--ease)}
         <button type="button" data-policy="datos">Política de Protección de Datos Personales (Ley 29733)</button>
         <button type="button" data-policy="sig">Política de Sistema Integrado de Gestión</button>
         <button type="button" data-policy="privacidad">Política de Privacidad</button>
-        <span style="margin-top:6px;font-size:12.5px;color:var(--text3)" data-cfg="city">La Molina, Lima – Perú</span>
+        <span style="margin-top:6px;font-size:12.5px;color:var(--text3)" data-cfg="city">La Molina - Lima - Perú</span>
       </div>
     </div>
 
     <div class="foot-bottom">
-      <span>© <span data-cfg="year">2026</span> <span data-cfg="brandFull">Geoandina Tech &amp; Analytics</span> · Todos los derechos reservados.</span>
-      <span class="mono">La Molina, Lima – Perú · GitHub + Vercel Static Ready</span>
+      <span>© <span data-cfg="year">2026</span> <span data-cfg="brandFull">DMDStack</span> (<span data-cfg="domain">DMDStack.com</span>) · Todos los derechos reservados.</span>
+      <span class="mono">La Molina - Lima - Perú · Desarrollo de Software, BI &amp; IA</span>
     </div>
   </div>
 </footer>
@@ -906,17 +930,18 @@ dialog[open]{animation:dlgIn .26s var(--ease)}
    CONFIGURACIÓN RÁPIDA DEL SITIO (EDITA AQUÍ TUS DATOS DE CONTACTO)
 ================================================================ */
 const SITE_CONFIG = {
-  brandShort: 'Geoandina',
-  brandFull: 'Geoandina Tech & Analytics',
-  brandSub: 'SOLUCIONES TECNOLÓGICAS PARA MINERÍA · PERÚ',
-  parentCompany: 'Geoandina',
-  phone: '+51 999 000 000',
-  phoneHref: 'tel:+51999000000',
-  whatsappHref: 'https://wa.me/51999000000',
-  email: 'contacto@geoandina.pe',
-  emailHref: 'mailto:contacto@geoandina.pe',
-  city: 'La Molina, Lima – Perú',
-  address: 'Av. La Molina, La Molina 15024, Lima',
+  brandShort: 'DMDStack',
+  brandFull: 'DMDStack',
+  brandSub: 'DESARROLLAMOS SOFTWARE PARA HACER CRECER TU NEGOCIO',
+  contactName: 'David Mamani',
+  contactRole: 'Gerente General · DMDStack',
+  phone: '+51 997 050 382',
+  phoneHref: 'tel:+51997050382',
+  whatsappHref: 'https://wa.me/51997050382',
+  email: 'pdangel98@gmail.com',
+  emailHref: 'mailto:pdangel98@gmail.com',
+  city: 'La Molina - Lima - Perú',
+  domain: 'DMDStack.com',
   year: '2026'
 };
 
@@ -945,14 +970,14 @@ function applySiteConfig() {
 function setTheme(theme) {
   document.documentElement.dataset.theme = theme;
   $('#themeIc').innerHTML = theme === 'light' ? '<use href="#i-moon"/>' : '<use href="#i-sun"/>';
-  try { localStorage.setItem('geoandina_theme', theme); } catch (e) {}
+  try { localStorage.setItem('dmdstack_theme', theme); } catch (e) {}
   requestDraw();
 }
 $('#btnTheme').addEventListener('click', () => {
   setTheme(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light');
 });
 try {
-  const savedTheme = localStorage.getItem('geoandina_theme');
+  const savedTheme = localStorage.getItem('dmdstack_theme');
   if (savedTheme === 'light' || savedTheme === 'dark') setTheme(savedTheme);
 } catch (e) {}
 
@@ -1355,7 +1380,7 @@ function quantile(arr, q) {
 
 function buildDemoChips() {
   const wrap = $('#demoClassChips');
-  const items = [{ id: 'ALL', label: 'Todos los dominios', color: '#e0762f' }]
+  const items = [{ id: 'ALL', label: 'Todos los dominios', color: '#1d3f96' }]
     .concat(CLASSES.map(c => ({ id: c.id, label: `${c.id} · ${c.name.split('·')[0].trim()}`, color: c.color })));
   wrap.innerHTML = items.map(it => `
     <button class="chip" style="--c:${it.color}" data-dcls="${it.id}" aria-pressed="${DEMO.clsFilter === it.id}">
