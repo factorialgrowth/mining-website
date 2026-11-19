@@ -88,7 +88,6 @@ svg.ic{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;strok
 .nav a{font-size:13px;font-weight:600;color:var(--text2);padding:7px 11px;border-radius:9px;white-space:nowrap;border:1px solid transparent;transition:.18s}
 .nav a:hover{color:var(--text);background:var(--surface2)}
 .nav a.on{color:var(--cu2);background:var(--cu-soft);border-color:color-mix(in srgb,var(--cu) 38%,transparent)}
-.nav a.nav-mobile-portal{display:none}
 .top-actions{display:flex;gap:8px;margin-left:auto;align-items:center;flex:none}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:13px;font-weight:700;padding:9px 15px;border-radius:10px;
   border:1px solid var(--line2);background:var(--surface);color:var(--text);cursor:pointer;transition:.18s var(--ease);white-space:nowrap}
@@ -230,9 +229,14 @@ section.tight{padding:36px 0}
 .cls-pill{display:inline-flex;align-items:center;padding:2px 7px;border-radius:6px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700}
 .qc-ok{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent);padding:2px 7px;border-radius:6px}
 .qc-warn{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;color:var(--warn);background:color-mix(in srgb,var(--warn) 15%,transparent);padding:2px 7px;border-radius:6px}
-.demo-cta-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:16px;padding:14px 18px;border-radius:12px;background:color-mix(in srgb,var(--cu) 10%,var(--surface2));border:1px solid color-mix(in srgb,var(--cu) 38%,var(--line))}
-.demo-cta-bar p{font-size:13.5px;color:var(--text2)}
+.demo-cta-bar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:16px;padding:18px 20px;border-radius:13px;background:color-mix(in srgb,var(--cu) 8%,var(--surface2));border:1px solid color-mix(in srgb,var(--cu) 34%,var(--line))}
+.demo-cta-copy{flex:1 1 340px;min-width:0}
+.demo-cta-bar p{font-size:13.5px;color:var(--text2);margin-bottom:10px}
 .demo-cta-bar b{color:var(--text)}
+.demo-cta-contacts{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:12.5px;color:var(--text2)}
+.demo-cta-contacts span,.demo-cta-contacts a{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+.demo-cta-contacts svg{width:14px;height:14px;color:var(--cu2)}
+.demo-cta-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;flex:none}
 
 /* ============ CASOS DE ÉXITO ============ */
 .cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -337,7 +341,6 @@ dialog[open]{animation:dlgIn .26s var(--ease)}
   .nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow);padding:14px 18px;gap:6px;margin-left:0}
   .nav.open{display:flex}
   .nav a{padding:10px 12px;font-size:14px}
-  .nav a.nav-mobile-portal{display:block;margin-top:4px;border-color:color-mix(in srgb,var(--cu) 40%,transparent);color:var(--cu2);background:var(--cu-soft)}
   .menu-toggle{display:inline-flex;border-color:var(--cu);color:var(--cu2);width:38px;height:38px;padding:0}
   .foot-grid{grid-template-columns:1fr}
 }
@@ -345,7 +348,6 @@ dialog[open]{animation:dlgIn .26s var(--ease)}
   section{padding:40px 0}
   .lines-grid,.pillars-grid,.cases-grid,.reg-grid,.demo-kpis{grid-template-columns:1fr}
   .btn .bt-hide-sm{display:none}
-  .top-portal-btn{display:none}
   .top-contact-btn{padding:8px 11px;font-size:12px}
   #btnTheme{width:36px;height:36px;padding:0}
   .contact-brand-side,.contact-cards-wrap{padding:22px 18px}
@@ -423,16 +425,12 @@ dialog[open]{animation:dlgIn .26s var(--ease)}
       <a href="#casos">Casos de Uso</a>
       <a href="#regulaciones">Normativa Perú</a>
       <a href="#contacto">Contacto</a>
-      <a href="portal-geometalurgico.html" class="nav-mobile-portal">Portal Geometalúrgico v3.1 →</a>
     </nav>
 
     <div class="top-actions">
       <button class="btn icon" id="btnTheme" title="Cambiar tema claro/oscuro" aria-label="Cambiar tema">
         <svg class="ic" id="themeIc"><use href="#i-moon"/></svg>
       </button>
-      <a class="btn sm top-portal-btn" href="portal-geometalurgico.html" title="Abrir Portal Geometalúrgico completo">
-        <svg class="ic"><use href="#i-ext"/></svg><span class="bt-hide-sm">Portal Demo</span>
-      </a>
       <a class="btn primary sm top-contact-btn" href="#contacto">Contáctanos</a>
       <button class="btn icon menu-toggle" id="btnMenu" aria-label="Abrir menú" aria-expanded="false" aria-controls="mainNav">
         <svg class="ic" id="menuIc"><use href="#i-menu"/></svg>
@@ -661,10 +659,23 @@ dialog[open]{animation:dlgIn .26s var(--ease)}
         </div>
 
         <div class="demo-cta-bar">
-          <p><b>¿Quieres explorar el motor analítico completo?</b> Carga archivos CSV, revisa las 11 reglas QA/QC por muestra, la dispersión log-log Cu/Mo, el linaje de cada dato y la exportación de selecciones.</p>
-          <a class="btn primary" href="portal-geometalurgico.html">
-            Abrir Workbench Geometalúrgico Completo <svg class="ic"><use href="#i-arrow"/></svg>
-          </a>
+          <div class="demo-cta-copy">
+            <p><b>¿Quieres explorar el motor analítico completo?</b> Ponte en contacto y agendamos una demo personalizada en vivo (carga de archivos CSV, 11 reglas QA/QC por muestra, dispersión log-log Cu/Mo, linaje del dato y exportación segura).</p>
+            <div class="demo-cta-contacts">
+              <span><svg class="ic"><use href="#i-layers"/></svg><b data-cfg="contactName">David Mamani</b></span>
+              <a data-cfg-href="phoneHref" href="tel:+51997050382"><svg class="ic"><use href="#i-phone"/></svg><span data-cfg="phone">+51 997 050 382</span></a>
+              <a data-cfg-href="emailHref" href="mailto:pdangel98@gmail.com"><svg class="ic"><use href="#i-mail"/></svg><span data-cfg="email">pdangel98@gmail.com</span></a>
+              <span><svg class="ic"><use href="#i-pin"/></svg><span data-cfg="city">La Molina - Lima - Perú</span></span>
+            </div>
+          </div>
+          <div class="demo-cta-actions">
+            <a class="btn" data-cfg-href="whatsappHref" href="https://wa.me/51997050382" target="_blank" rel="noopener">
+              <svg class="ic"><use href="#i-phone"/></svg>WhatsApp
+            </a>
+            <a class="btn primary" href="#contacto">
+              Agendar una Demo <svg class="ic"><use href="#i-arrow"/></svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -883,7 +894,7 @@ dialog[open]{animation:dlgIn .26s var(--ease)}
         <a href="#nosotros">Nuestros Pilares</a>
         <a href="#lineas-de-negocio">Líneas de Negocio</a>
         <a href="#demo-interactiva">Demo Interactiva</a>
-        <a href="portal-geometalurgico.html">Workbench Geometalúrgico v3.1</a>
+        <a href="#casos">Casos de Uso</a>
         <a href="#contacto">Contacto Directo</a>
       </div>
 
@@ -1222,8 +1233,7 @@ function openLineModal(id) {
       `).join('')}
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
-      ${l.id === 'geomet' ? '<a class="btn" href="portal-geometalurgico.html">Ver Portal Geometalúrgico</a>' : ''}
-      <a class="btn primary" href="#contacto" id="dlgContactJump">Solicitar reunión informativa</a>
+      <a class="btn primary" href="#contacto" id="dlgContactJump">Agendar demo informativa</a>
     </div>
   `;
   const jump = $('#dlgContactJump');

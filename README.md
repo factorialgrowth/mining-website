@@ -6,8 +6,7 @@ Sitio web corporativo estático y portafolio de soluciones de **DMDStack** en **
 
 ## Archivos del Proyecto
 
-- `index.html`: Página principal corporativa con estética moderna Blanco & Azul Cobalto (Hero ejecutivo, Pilares, 9 Líneas de Negocio con metodología de 5 etapas, Demo Semianimada Interactiva de perforaciones Cu-Mo, Casos de Uso, Sección de Cumplimiento Normativo en Perú / Ley N.° 29733, Preguntas Frecuentes y Contacto Directo sin formularios).
-- `portal-geometalurgico.html`: Workbench geometalúrgico completo v3.1 (carga de CSV, 11 reglas QA/QC por muestra, vistas espaciales 1:1 sincronizadas, dispersión log-log Cu vs Mo, linaje del dato y exportación).
+- `index.html`: Página principal corporativa con estética moderna Blanco & Azul Cobalto (Hero ejecutivo, Pilares, 9 Líneas de Negocio con metodología de 5 etapas, Demo Semianimada Interactiva de perforaciones Cu-Mo con datos 100% sintéticos, Casos de Uso, Sección de Cumplimiento Normativo en Perú / Ley N.° 29733, Preguntas Frecuentes y Contacto Directo sin formularios).
 - `vercel.json`: Configuración de despliegue estático para Vercel (`cleanUrls`).
 
 ---
